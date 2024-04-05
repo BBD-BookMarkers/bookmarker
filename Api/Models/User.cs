@@ -1,5 +1,8 @@
-﻿namespace Api.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Api.Models
 {
+    [Table("user")]
     public class User
     {
         public int UserId { set; get; }
