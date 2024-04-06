@@ -38,6 +38,7 @@ namespace Api.Controllers
                     userId = user.UserId,
                     username = user.Username,
                     token = tokenString,
+                    secret = _config["Jwt:Key"]
                 });
             }
 
