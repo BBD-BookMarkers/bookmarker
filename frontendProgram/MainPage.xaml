@@ -1,30 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="frontendProgram.MainPage">
+             x:Class="frontendProgram.MainPage"
+             BackgroundColor="#1f1f1f"
+             >
 
     <ScrollView>
         <VerticalStackLayout 
             Padding="30,0"
             Spacing="25">
-            <Label Text="Home" MaximumHeightRequest="90" FontSize="35" FontFamily=""></Label>
+            <Label Text="Home" MaximumHeightRequest="90" FontSize="35" FontFamily="" TextColor="White"></Label>
 
-            <Frame BorderColor = "Silver">
+            <Frame BorderColor = "Silver" BackgroundColor="Black">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="newBookmark" Text="New Bookmark" SemanticProperties.Hint="Click me to create a new bookmark" Clicked="OnCounterClicked" Grid.Column="1" HorizontalOptions="Start" BackgroundColor="#ac99ea"/>
-                    <Button x:Name="Refresh" Text="Refresh" SemanticProperties.Hint="Click me to refresh and get your latest bookmarks" Clicked="Refresh_Clicked" Grid.Column="0" HorizontalOptions="Start" BackgroundColor="#ac99ea"/>
-                    <Button x:Name="Login" Text="Login" SemanticProperties.Hint="Click me to login with github" Clicked="Button_Clicked" Grid.Column="4" HorizontalOptions="End" BackgroundColor="#ac99ea"/>
+                    <Button x:Name="Refresh" Text="Refresh" SemanticProperties.Hint="Click me to refresh and get your latest bookmarks" Clicked="Refresh_Clicked" Grid.Column="0" HorizontalOptions="Start" BackgroundColor="#ac99ea" TextColor="Black"/>
+                    <Button x:Name="Login" Text="Login" SemanticProperties.Hint="Click me to login with github" Clicked="Button_Clicked" Grid.Column="4" HorizontalOptions="End" BackgroundColor="#ac99ea" TextColor="Black"/>
                 </Grid>
             </Frame>
 
-            <Frame BorderColor="Silver">
+            <Frame BorderColor="Silver" BackgroundColor="Black">
                 <ScrollView Orientation="Vertical">
                     <VerticalStackLayout x:Name="TableOfBookmarks">
                     </VerticalStackLayout>
