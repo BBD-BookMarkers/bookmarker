@@ -26,6 +26,7 @@ namespace ToolWindow
         {
             await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
             await ToolWindow1Command.InitializeAsync(this);
+            await Command1.InitializeAsync(this);
         }
 
         #endregion
