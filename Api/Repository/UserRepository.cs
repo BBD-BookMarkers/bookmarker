@@ -1,6 +1,6 @@
 ﻿using Api.Data;
 using Api.Interfaces;
-using Api.Models;
+using Shared.Models;
 
 namespace Api.Repository
 {

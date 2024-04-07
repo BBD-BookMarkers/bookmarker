@@ -29,4 +29,6 @@
 		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.5.0" />
 	</ItemGroup>
 
+	<Import Project="..\Shared\Shared.projitems" Label="Shared" />
+
 </Project>
