@@ -7,13 +7,6 @@
 	  <UserSecretsId>4f28212e-ceda-4dff-bca7-1f83f5331e8b</UserSecretsId>
   </PropertyGroup>
 
-	<PropertyGroup>
-		<ContainerImageName>products-crud-api</ContainerImageName>
-		<ContainerImageTags>latest</ContainerImageTags>
-		<PublishProfile>DefaultContainer</PublishProfile>
-		<RuntimeIdentifier>linux-x64</RuntimeIdentifier>
-	</PropertyGroup>
-
 	<ItemGroup>
 		<Compile Remove="Controller\**" />
 		<Content Remove="Controller\**" />
