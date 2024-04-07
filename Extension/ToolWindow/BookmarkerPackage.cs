@@ -9,15 +9,15 @@ using Task = System.Threading.Tasks.Task;
 namespace ToolWindow
 {
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
-    [Guid(ToolWindowPackage.PackageGuidString)]
+    [Guid(BookmarkerPackage.PackageGuidString)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
-    [ProvideToolWindow(typeof(ToolWindow1), Style = VsDockStyle.Tabbed, Window = ToolWindowGuids.SolutionExplorer)]
-    [ProvideToolWindowVisibility(typeof(ToolWindow1), VSConstants.UICONTEXT.NoSolution_string)]
-    [ProvideToolWindowVisibility(typeof(ToolWindow1), VSConstants.UICONTEXT.EmptySolution_string)]
-    [ProvideToolWindowVisibility(typeof(ToolWindow1), VSConstants.UICONTEXT.SolutionHasSingleProject_string)]
-    [ProvideToolWindowVisibility(typeof(ToolWindow1), VSConstants.UICONTEXT.SolutionHasMultipleProjects_string)]
+    [ProvideToolWindow(typeof(Bookmarker), Style = VsDockStyle.Tabbed, Window = ToolWindowGuids.SolutionExplorer)]
+    [ProvideToolWindowVisibility(typeof(Bookmarker), VSConstants.UICONTEXT.NoSolution_string)]
+    [ProvideToolWindowVisibility(typeof(Bookmarker), VSConstants.UICONTEXT.EmptySolution_string)]
+    [ProvideToolWindowVisibility(typeof(Bookmarker), VSConstants.UICONTEXT.SolutionHasSingleProject_string)]
+    [ProvideToolWindowVisibility(typeof(Bookmarker), VSConstants.UICONTEXT.SolutionHasMultipleProjects_string)]
 
-    public sealed class ToolWindowPackage : AsyncPackage
+    public sealed class BookmarkerPackage : AsyncPackage
     {
         public const string PackageGuidString = "553aba0a-ba3c-41d1-9eaa-5e663ac5cb8f";
 
@@ -25,8 +25,8 @@ namespace ToolWindow
         protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
             await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-            await ToolWindow1Command.InitializeAsync(this);
-            await Command1.InitializeAsync(this);
+            await BookmarkerCommand.InitializeAsync(this);
+            await Add_Bookmark.InitializeAsync(this);
         }
 
         #endregion

@@ -45,14 +45,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Command1.cs" />
+    <Compile Include="Add_Bookmark.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ToolWindow1.cs" />
-    <Compile Include="ToolWindow1Command.cs" />
-    <Compile Include="ToolWindow1Control.xaml.cs">
-      <DependentUpon>ToolWindow1Control.xaml</DependentUpon>
+    <Compile Include="Bookmarker.cs" />
+    <Compile Include="BookmarkerCommand.cs" />
+    <Compile Include="BookmarkerControl.xaml.cs">
+      <DependentUpon>BookmarkerControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ToolWindowPackage.cs" />
+    <Compile Include="BookmarkerPackage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="source.extension.vsixmanifest">
@@ -74,18 +74,21 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.SDK" Version="17.0.32112.339" ExcludeAssets="runtime" />
-    <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="17.9.3184" />
+    <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="17.9.3174">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="ToolWindow1Control.xaml">
+    <Page Include="BookmarkerControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Command1.png" />
+    <Content Include="Resources\Add_Bookmark.png" />
     <Content Include="Resources\ToolWindow1Command.png" />
-    <VSCTCompile Include="ToolWindowPackage.vsct">
+    <VSCTCompile Include="BookmarkerPackage.vsct">
       <ResourceName>Menus.ctmenu</ResourceName>
     </VSCTCompile>
   </ItemGroup>

@@ -8,20 +8,20 @@
         <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1" />
         <Icon guid="guidImages" id="bmpPic1" />
         <Strings>
-          <ButtonText>ToolWindow1</ButtonText>
+          <ButtonText>Bookmarker</ButtonText>
         </Strings>
       </Button>
-      <Button guid="guidToolWindowPackageCmdSet1" id="cmdidCommand1" priority="0x0100" type="Button">
+      <Button guid="guidToolWindowPackageCmdSet1" id="cmdidAdd_Bookmark" priority="0x0100" type="Button">
         <Parent guid="guidToolWindowPackageCmdSet1" id="MyMenuGroup" />
-        <Icon guid="guidImages1" id="bmpPic1" />
+        <Icon guid="guidImages2" id="bmpPic1" />
         <Strings>
-          <ButtonText>Invoke Command1</ButtonText>
+          <ButtonText>Add Bookmark</ButtonText>
         </Strings>
       </Button>
     </Buttons>
     <Bitmaps>
       <Bitmap guid="guidImages" href="Resources\ToolWindow1Command.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
-      <Bitmap guid="guidImages1" href="Resources\Command1.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
+      <Bitmap guid="guidImages2" href="Resources\Add_Bookmark.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
     </Bitmaps>
     <Groups>
       <Group guid="guidToolWindowPackageCmdSet1" id="MyMenuGroup" priority="0x0600">
@@ -47,9 +47,19 @@
     <GuidSymbol value="{b90beadf-0c5b-43d4-8026-1c54f260a10b}" name="guidToolWindowPackageCmdSet1">
       <IDSymbol value="4128" name="MyMenuGroup" />
       <IDSymbol value="256" name="cmdidCommand1" />
+      <IDSymbol value="4129" name="cmdidAdd_Bookmark" />
     </GuidSymbol>
   
     <GuidSymbol value="{62f1131b-6eab-4549-bc2e-44ab386319b6}" name="guidImages1">
+      <IDSymbol name="bmpPic1" value="1" />
+      <IDSymbol name="bmpPic2" value="2" />
+      <IDSymbol name="bmpPicSearch" value="3" />
+      <IDSymbol name="bmpPicX" value="4" />
+      <IDSymbol name="bmpPicArrows" value="5" />
+      <IDSymbol name="bmpPicStrikethrough" value="6" />
+    </GuidSymbol>
+  
+    <GuidSymbol value="{3793df9e-0884-44e7-aa1a-25d952d0d724}" name="guidImages2">
       <IDSymbol name="bmpPic1" value="1" />
       <IDSymbol name="bmpPic2" value="2" />
       <IDSymbol name="bmpPicSearch" value="3" />
