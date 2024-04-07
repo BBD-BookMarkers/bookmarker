@@ -12,7 +12,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extension", "Extension\Extension.csproj", "{97A14AF9-CD83-40B0-B43D-6785F40E09D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maui Front End", "frontendProgram\Maui Front End.csproj", "{41EA478D-2D4E-41A9-A24A-8BB5AD0F601E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maui Front End", "frontendProgram\Maui Front End.csproj", "{41EA478D-2D4E-41A9-A24A-8BB5AD0F601E}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Shared", "Shared\Shared.shproj", "{118685F7-8606-4A44-AC75-936C9BC4BE14}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,11 +50,27 @@ Global
 		{97A14AF9-CD83-40B0-B43D-6785F40E09D5}.Release|arm64.Build.0 = Release|arm64
 		{97A14AF9-CD83-40B0-B43D-6785F40E09D5}.Release|x86.ActiveCfg = Release|x86
 		{97A14AF9-CD83-40B0-B43D-6785F40E09D5}.Release|x86.Build.0 = Release|x86
+		{41EA478D-2D4E-41A9-A24A-8BB5AD0F601E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41EA478D-2D4E-41A9-A24A-8BB5AD0F601E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41EA478D-2D4E-41A9-A24A-8BB5AD0F601E}.Debug|arm64.ActiveCfg = Debug|Any CPU
+		{41EA478D-2D4E-41A9-A24A-8BB5AD0F601E}.Debug|arm64.Build.0 = Debug|Any CPU
+		{41EA478D-2D4E-41A9-A24A-8BB5AD0F601E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{41EA478D-2D4E-41A9-A24A-8BB5AD0F601E}.Debug|x86.Build.0 = Debug|Any CPU
+		{41EA478D-2D4E-41A9-A24A-8BB5AD0F601E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41EA478D-2D4E-41A9-A24A-8BB5AD0F601E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41EA478D-2D4E-41A9-A24A-8BB5AD0F601E}.Release|arm64.ActiveCfg = Release|Any CPU
+		{41EA478D-2D4E-41A9-A24A-8BB5AD0F601E}.Release|arm64.Build.0 = Release|Any CPU
+		{41EA478D-2D4E-41A9-A24A-8BB5AD0F601E}.Release|x86.ActiveCfg = Release|Any CPU
+		{41EA478D-2D4E-41A9-A24A-8BB5AD0F601E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {928D33C8-AE53-4DF8-A071-61C649A30552}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Shared\Shared.projitems*{118685f7-8606-4a44-ac75-936c9bc4be14}*SharedItemsImports = 13
+		Shared\Shared.projitems*{5e92e05c-6eab-4bb8-8ca7-885f93524b32}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal

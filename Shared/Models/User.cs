@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Api.Models
+namespace Shared.Models
 {
     [Table("user")]
     public class User
