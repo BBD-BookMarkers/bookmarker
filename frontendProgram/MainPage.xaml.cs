@@ -5,6 +5,7 @@ using frontendProgram.Routes;
 using frontendProgram.Bookmarks;
 using System.Xml.Linq;
 using Microsoft.Extensions.Logging;
+using frontendProgram.Requests;
 namespace frontendProgram
 {
     public partial class MainPage : ContentPage
@@ -106,9 +107,12 @@ namespace frontendProgram
 
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
+        private async void Login_Clicked(object sender, EventArgs e)
         {
-
+            string full_device_code= await Request.GetDeviceCode();
+            string partial_device_code= Request.getPartialDeviceCode(full_device_code);
+            var popup= new LoginPage(partial_device_code,full_device_code);
+            await Navigation.PushModalAsync(popup);
         }
 
         private void Delete_Entry(object sender, EventArgs e, int bookmarkID)

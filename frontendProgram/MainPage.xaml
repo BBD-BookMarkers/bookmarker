@@ -20,7 +20,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Refresh" Text="Refresh" SemanticProperties.Hint="Click me to refresh and get your latest bookmarks" Clicked="Refresh_Clicked" Grid.Column="0" HorizontalOptions="Start" BackgroundColor="#ac99ea" TextColor="Black"/>
-                    <Button x:Name="Login" Text="Login" SemanticProperties.Hint="Click me to login with github" Clicked="Button_Clicked" Grid.Column="4" HorizontalOptions="End" BackgroundColor="#ac99ea" TextColor="Black"/>
+                    <Button x:Name="Login" Text="Login" SemanticProperties.Hint="Click me to login with github" Clicked="Login_Clicked" Grid.Column="4" HorizontalOptions="End" BackgroundColor="#ac99ea" TextColor="Black"/>
                 </Grid>
             </Frame>
 
