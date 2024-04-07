@@ -60,7 +60,7 @@ namespace frontendProgram
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("file does not exist");
+                Debug.WriteLine(ex + "file does not exist");
             }
 
         }

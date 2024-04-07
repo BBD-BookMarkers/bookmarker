@@ -2,7 +2,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Extension
+namespace ToolWindow
 {
     /// <summary>
     /// This class implements the tool window exposed by this package and hosts a user control.
@@ -15,7 +15,7 @@ namespace Extension
     /// implementation of the IVsUIElementPane interface.
     /// </para>
     /// </remarks>
-    [Guid("5595cb19-e544-475d-97de-71e07b3741c0")]
+    [Guid("7fb89476-1d23-484f-b83d-2a73b11408a8")]
     public class ToolWindow1 : ToolWindowPane
     {
         /// <summary>
