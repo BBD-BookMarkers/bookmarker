@@ -10,14 +10,43 @@ namespace frontendProgram
 {
     public partial class MainPage : ContentPage
     {
-        private Dictionary<int,Bookmark> Bookmarks = new Dictionary<int,Bookmark>();
+        private Dictionary<int, Bookmark> Bookmarks;
+        private MessageService MessageService;
+        private string bearertoken;
         public MainPage()
         {
             InitializeComponent();
+            
+
+
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            Bookmarks = new Dictionary<int, Bookmark>();
             fillDictionary();
+            checkLogin();
             loadBookmarks();
+        }
+        private void checkLogin()
+        {
+            Debug.WriteLine("Bearer Token: "+Request.getBearerToken());
 
+            if (Request.getBearerToken() != null)
+            {
+                Login.Text = "Logout";
+                Login.Clicked -= Login_Clicked;
+                Login.Clicked += logout;
+            }
+        }
 
+        private void logout(object sender, EventArgs e)
+        {
+            Login.Clicked -= logout;
+            Login.Text = "Login";
+            Request.setBearerToken(null);
+            Login.Clicked += Login_Clicked;
         }
         private void refreshList()
         {
@@ -110,8 +139,9 @@ namespace frontendProgram
         private async void Login_Clicked(object sender, EventArgs e)
         {
             string full_device_code= await Request.GetDeviceCode();
-            string partial_device_code= Request.getPartialDeviceCode(full_device_code);
-            var popup= new LoginPage(partial_device_code,full_device_code);
+            string user_code= Request.getUserCode(full_device_code);
+            string device_code=Request.getDeviceCode(full_device_code);
+            var popup= new LoginPage(user_code,device_code);
             await Navigation.PushModalAsync(popup);
         }
 

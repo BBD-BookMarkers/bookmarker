@@ -1,8 +1,10 @@
+using frontendProgram.Requests;
 using System.Diagnostics;
 namespace frontendProgram;
 
 public partial class LoginPage : ContentPage
 {
+    private MessageService messageService;
     private static string githubLoginURL = "https://github.com/login/device";
     private static ProcessStartInfo psi = new ProcessStartInfo
     {
@@ -11,10 +13,11 @@ public partial class LoginPage : ContentPage
     };
 
 
-    public LoginPage(string partial_deivce_code, string full_device_code)
+    public LoginPage(string user_code, string device_code)
 	{
 		InitializeComponent();
-        onLoad(partial_deivce_code,full_device_code);
+        this.messageService = new MessageService();
+        onLoad(user_code,device_code);
     }
 
     async Task launchGithub()
@@ -22,11 +25,28 @@ public partial class LoginPage : ContentPage
         await Task.Delay(5000);
         Process.Start(psi);
     }
-    public async void onLoad(string partial_device_code, string full_device_code)
+
+    private async Task<string> finalizeLogin(string device_code)
+    {
+        string token= await Request.AuthorizeLogin(device_code);
+        if (token.Contains("access_token"))
+        {
+            return (token.Split("=")[1]);
+        }
+        else if(token.Contains("Login Error"))
+        {
+            return ("Not logged in");
+        }
+        else
+        {
+            return ("Fatal Error");
+        }
+    }
+    public async void onLoad(string user_code, string device_code)
     {
 
         Label deviceCodeLabel = new Label();
-        deviceCodeLabel.Text = "Your login code is: " + partial_device_code;
+        deviceCodeLabel.Text = "Your login code is: " + user_code;
         deviceCodeLabel.TextColor = Color.Parse("lime");
         deviceCodeLabel.VerticalOptions = LayoutOptions.Center;
         deviceCodeLabel.HorizontalOptions = LayoutOptions.Center;
@@ -43,7 +63,7 @@ public partial class LoginPage : ContentPage
 
         clipboard.Clicked += (s, e) =>
         {
-            Clipboard.SetTextAsync(partial_device_code);
+            Clipboard.SetTextAsync(user_code);
         };
 
         Grid grid= new Grid();
@@ -75,7 +95,30 @@ public partial class LoginPage : ContentPage
 
         loggedIn.Clicked += async (s, e) =>
         {
-            await Navigation.PopModalAsync();
+            string token = await finalizeLogin(device_code);
+            if(token == "Fatal Error")
+            {
+                Label fail = new Label();
+                fail.Text = "Fatal Error: Please try again later";
+                fail.HorizontalOptions = LayoutOptions.Center;
+                fail.FontSize = 25;
+                fail.TextColor = Color.Parse("red");
+                LoginLayout.Children.Add(fail);
+
+            } else if(token == "Not logged in")
+            {
+                Label completeLogin = new Label();
+                completeLogin.Text = "Please Complete Login First";
+                completeLogin.HorizontalOptions = LayoutOptions.Center;
+                completeLogin.FontSize = 25;
+                LoginLayout.Children.Add(completeLogin);
+            }
+            else
+            {
+                messageService.sendMessage(token);
+                Request.setBearerToken(token);
+                await Navigation.PopModalAsync();
+            }
         };
         LoginLayout.Children.Add(loggedIn);
         await launchGithub();

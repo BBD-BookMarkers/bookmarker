@@ -13,12 +13,28 @@ namespace frontendProgram.Requests
         private static string githubLoginURL = "https://github.com/login/device/code";
         private static string AccessTokenURL = "https://github.com/login/oauth/access_token";
         private static string grantType = "urn:ietf:params:oauth:grant-type:device_code";
-
-        public static string getPartialDeviceCode(string full_device_code)
+        private static string? bearerToken;
+        public static string getUserCode(string full_device_code)
         {
             string[] parts = full_device_code.Split('&');
             string device_code = parts[3].Split("=")[1];
             return (device_code);
+        }
+        public static string getDeviceCode(string full_device_code)
+        {
+            string[] parts = full_device_code.Split('&');
+            string device_code = parts[0].Split("=")[1];
+            return (device_code);
+        }
+
+        public static void setBearerToken(string new_bearerToken)
+        {
+            bearerToken = new_bearerToken;
+        }
+
+        public static string getBearerToken()
+        {
+            return bearerToken;
         }
        public static async Task<string> GetDeviceCode()
         {
@@ -53,7 +69,7 @@ namespace frontendProgram.Requests
         public static async Task<string> AuthorizeLogin(string device_code)
         {
             using (HttpClient client = new HttpClient()) {
-                string[] keys = { "client_id", "device_code", "gran_type" };
+                string[] keys = { "client_id", "device_code", "grant_type" };
                 string jsonObject = $"{{\"{keys[0]}\": \"{client_id}\", \"{keys[1]}\": \"{device_code}\", \"{keys[2]}\": \"{grantType}\"}}";
 
                 StringContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
@@ -69,7 +85,7 @@ namespace frontendProgram.Requests
                     }
                     else
                     {
-                        return ("Error: " + response.StatusCode);
+                        return ("Login Error: " + response.StatusCode);
                     }
                 }catch(Exception ex)
                 {
