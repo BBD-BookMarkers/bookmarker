@@ -1,5 +1,7 @@
 ﻿using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
+using Microsoft.VisualStudio.Text;
+using Microsoft.VisualStudio.Text.Editor;
 using System;
 using System.ComponentModel.Design;
 using System.Globalization;
@@ -40,7 +42,6 @@ namespace ToolWindow
         {
             this.package = package ?? throw new ArgumentNullException(nameof(package));
             commandService = commandService ?? throw new ArgumentNullException(nameof(commandService));
-            MessageBox.Show(commandService.ToString());
             var menuCommandID = new CommandID(CommandSet, CommandId);
             var menuItem = new MenuCommand(this.CreateBookmark, menuCommandID);
             commandService.AddCommand(menuItem);
@@ -105,7 +106,11 @@ namespace ToolWindow
 
         private void CreateBookmark(object sender, EventArgs e)
         {
-            MessageBox.Show("Bookmark added!");
+            GetSelectedText getSelectedText = new GetSelectedText();
+            getSelectedText.GetCurrentViewHost();
+            ITextSnapshot snapshot = getSelectedText.GetSelection(getSelectedText.GetCurrentViewHost());
+            MessageBox.Show(snapshot.GetText());
+
         }
     }
 }
