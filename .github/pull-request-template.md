@@ -1,4 +1,4 @@
-### Related Ticket: [BOOK-XXXX](https://bbdlevelup.atlassian.net/browse/BOOK-XXXX)
+### Related Ticket: [BOOK-XXXX](https://beanpedia.atlassian.net/browse/[BOOK-XXXX])
 
 ### This PR affects / introduces the following:
 
