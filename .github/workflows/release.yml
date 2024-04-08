@@ -20,13 +20,6 @@ jobs:
         steps:
         - name: Checkout Code
           uses: actions/checkout@v3
-
-        - name: Assume the deploy pipeline user role
-          uses: aws-actions/configure-aws-credentials@v4.0.1
-          with:
-            role-to-assume: ${{secrets.AWS_SECRET_ASSUME_ROLE}}
-            role-session-name: federatedOIDC-GH-AWS
-            aws-region: ${{secrets.AWS_SECRET_REGION}}   
             
         - name: Setup dotnet
           uses: actions/setup-dotnet@v4
@@ -41,6 +34,7 @@ jobs:
             dotnet restore "./frontendProgram/Maui Front End.csproj"
             dotnet build -c Release "./frontendProgram/Maui Front End.csproj"
             dotnet publish -c Release "./frontendProgram/Maui Front End.csproj"
+
         - name: Create release
           id: create_release
           uses: actions/create-release@v1
