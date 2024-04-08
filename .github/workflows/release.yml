@@ -9,10 +9,6 @@ on:
             - main
             - dev
 
-permissions:
-    contents: read
-    id-token: write
-
 jobs:
    make-release:
         runs-on: windows-latest
@@ -36,18 +32,16 @@ jobs:
             dotnet workload restore
             dotnet build -c Release "./frontendProgram/Maui Front End.csproj"
             dotnet publish -f net8.0-windows10.0.19041.0 -c Release "./frontendProgram/Maui Front End.csproj"
+        
 
         - name: Create release
-          id: create_release
-          uses: actions/create-release@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          uses: "marvinpinto/action-automatic-releases@latest"
           with:
-            tag_name: ${{ github.ref }}
-            release_name: ${{ github.ref }}
-            body: |
-              Extra Extra! Get your new release!
-            draft: false
+            repo_token: ${{ secrets.GITHUB_TOKEN }}
+            automatic_release_tag: "latest"
             prerelease: false
+            title: "Extra Extra! Get your new release!"
+            files: |
+              frontendProgram/bin/Release/*
 
             
