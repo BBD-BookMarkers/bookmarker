@@ -15,12 +15,11 @@ permissions:
 
 jobs:
    make-release:
-        runs-on: ubuntu-latest
+        runs-on: windows-latest
 
         steps:
-        - name: Checkout Code
-          uses: actions/checkout@v3
-            
+        - uses: actions/checkout@v3
+
         - name: Setup dotnet
           uses: actions/setup-dotnet@v4
           with:
@@ -28,6 +27,9 @@ jobs:
 
         - name: Install ASP.NET Core
           run: dotnet tool install --global dotnet-aspnet-codegenerator
+
+        - name: Install Maui
+          run: dotnet workload install maui
 
         - name: Build and publish project
           run: |
