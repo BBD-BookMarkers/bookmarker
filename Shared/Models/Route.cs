@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Shared.Models
