@@ -61,10 +61,10 @@ namespace ToolWindow
             GetSelectedText getSelectedText = new GetSelectedText();
             getSelectedText.GetCurrentViewHost();
             ITextSelection selection = getSelectedText.GetSelection(getSelectedText.GetCurrentViewHost());
-            string text = selection.StreamSelectionSpan.SnapshotSpan.GetText();
             int startLine = selection.StreamSelectionSpan.SnapshotSpan.Start.GetContainingLine().LineNumber + 1; // 1-based
             string filePath = getSelectedText.GetFilePath(getSelectedText.GetCurrentViewHost().TextView);
-            MessageBox.Show(startLine.ToString());
+            DateTime dateCreated = DateTime.Now;
+            MessageBox.Show(dateCreated.ToString());
 
         }
     }
