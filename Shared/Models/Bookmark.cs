@@ -9,6 +9,7 @@ namespace Shared.Models
         [SwaggerSchema(ReadOnly = true)]
         public int BookmarkId { get; set; } = default;
         public int UserId { get; set; }
+        [SwaggerSchema(ReadOnly = true)]
         public int RouteId { get; set; }
         public required string Name { get; set; }
         public DateTime DateCreated { get; set; }
