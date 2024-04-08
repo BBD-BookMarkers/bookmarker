@@ -33,9 +33,9 @@ jobs:
 
         - name: Build and publish project
           run: |
-            dotnet restore "./frontendProgram/Maui Front End.csproj"
+            dotnet workload restore
             dotnet build -c Release "./frontendProgram/Maui Front End.csproj"
-            dotnet publish -c Release "./frontendProgram/Maui Front End.csproj"
+            dotnet publish -f net8.0-windows10.0.19041.0 -c Release "./frontendProgram/Maui Front End.csproj"
 
         - name: Create release
           id: create_release
