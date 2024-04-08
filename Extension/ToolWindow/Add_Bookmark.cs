@@ -65,6 +65,11 @@ namespace ToolWindow
             string filePath = getSelectedText.GetFilePath(getSelectedText.GetCurrentViewHost().TextView);
             DateTime dateCreated = DateTime.Now;
             MessageBox.Show(dateCreated.ToString());
+            // Display a popup where the user can input a name for the bookmark
+            // Create a new bookmark instance
+
+            // Add the bookmark to the list of bookmarks
+            
 
         }
     }
