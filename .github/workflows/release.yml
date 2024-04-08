@@ -1,0 +1,57 @@
+name: Client UI Release
+
+on: 
+    pull_request:
+        branches:
+            - dev
+    push:
+        branches:
+            - main
+            - dev
+
+permissions:
+    contents: read
+    id-token: write
+
+jobs:
+   make-release:
+        runs-on: ubuntu-latest
+
+        steps:
+        - name: Checkout Code
+          uses: actions/checkout@v3
+
+        - name: Assume the deploy pipeline user role
+          uses: aws-actions/configure-aws-credentials@v4.0.1
+          with:
+            role-to-assume: ${{secrets.AWS_SECRET_ASSUME_ROLE}}
+            role-session-name: federatedOIDC-GH-AWS
+            aws-region: ${{secrets.AWS_SECRET_REGION}}   
+            
+        - name: Setup dotnet
+          uses: actions/setup-dotnet@v4
+          with:
+            dotnet-version: 8.x
+
+        - name: Install ASP.NET Core
+          run: dotnet tool install --global dotnet-aspnet-codegenerator
+
+        - name: Build and publish project
+          run: |
+            dotnet restore "./frontendProgram/Maui Front End.csproj"
+            dotnet build -c Release "./frontendProgram/Maui Front End.csproj"
+            dotnet publish -c Release "./frontendProgram/Maui Front End.csproj"
+        - name: Create release
+          id: create_release
+          uses: actions/create-release@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            tag_name: ${{ github.ref }}
+            release_name: ${{ github.ref }}
+            body: |
+              Extra Extra! Get your new release!
+            draft: false
+            prerelease: false
+
+            
