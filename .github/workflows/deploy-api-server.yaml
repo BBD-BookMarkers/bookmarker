@@ -37,9 +37,9 @@ jobs:
 
         - name: Build and publish project
           run: |
-            dotnet restore .\Api\Api.csproj
-            dotnet build -c Release .\Api\Api.csproj
-            dotnet publish -c Release .\Api\Api.csproj
+            dotnet restore ./Api/Api.csproj
+            dotnet build -c Release ./Api/Api.csproj
+            dotnet publish -c Release ./Api/Api.csproj
             
         - name: Get IP Address
           run: | 
