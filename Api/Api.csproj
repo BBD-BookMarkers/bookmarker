@@ -7,13 +7,6 @@
 	  <UserSecretsId>4f28212e-ceda-4dff-bca7-1f83f5331e8b</UserSecretsId>
   </PropertyGroup>
 
-	<PropertyGroup>
-		<ContainerImageName>products-crud-api</ContainerImageName>
-		<ContainerImageTags>latest</ContainerImageTags>
-		<PublishProfile>DefaultContainer</PublishProfile>
-		<RuntimeIdentifier>linux-x64</RuntimeIdentifier>
-	</PropertyGroup>
-
 	<ItemGroup>
 		<Compile Remove="Controller\**" />
 		<Content Remove="Controller\**" />
@@ -33,7 +26,10 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.5.0" />
 		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.5.0" />
 	</ItemGroup>
+
+	<Import Project="..\Shared\Shared.projitems" Label="Shared" />
 
 </Project>

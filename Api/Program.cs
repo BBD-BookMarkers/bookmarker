@@ -6,6 +6,7 @@ using System.Text;
 using Api.Data;
 using Api.Interfaces;
 using Api.Repository;
+using Shared.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,12 +38,14 @@ builder.Services.AddSwaggerGen(option =>
             Array.Empty<string>()
         }
     });
+    option.EnableAnnotations();
 });
 builder.Services.AddDbContext<DataContext>(options =>
 {
     options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnection"]);
 });
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IBookmarkRepository, BookmarkRepository>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
  .AddJwtBearer(options =>
  {
