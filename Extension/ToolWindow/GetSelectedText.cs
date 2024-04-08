@@ -37,8 +37,8 @@ public class GetSelectedText
         return document;
     }
 
-    public ITextSnapshot GetSelection(IWpfTextViewHost viewHost)
+    public ITextSelection GetSelection(IWpfTextViewHost viewHost)
     {
-        return viewHost.TextView.TextSnapshot;
+        return viewHost.TextView.Selection;
     }
 }

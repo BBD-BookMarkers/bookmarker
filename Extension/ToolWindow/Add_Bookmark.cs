@@ -108,8 +108,9 @@ namespace ToolWindow
         {
             GetSelectedText getSelectedText = new GetSelectedText();
             getSelectedText.GetCurrentViewHost();
-            ITextSnapshot snapshot = getSelectedText.GetSelection(getSelectedText.GetCurrentViewHost());
-            MessageBox.Show(snapshot.GetText());
+            ITextSelection selection = getSelectedText.GetSelection(getSelectedText.GetCurrentViewHost());
+            string text = selection.StreamSelectionSpan.SnapshotSpan.GetText();
+            MessageBox.Show(text);
 
         }
     }
