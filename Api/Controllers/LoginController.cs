@@ -50,7 +50,8 @@ namespace Api.Controllers
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             var claims = new[]
             {
-                new Claim("username", user.Username)
+                new Claim("username", user.Username),
+                new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString())
             };
 
             var token = new JwtSecurityToken(_config["Jwt:Issuer"],
@@ -65,7 +66,7 @@ namespace Api.Controllers
         private User? AuthenticateUser(string username, string githubToken)
         {
             // Validate user's github token to authenticate user
-            User? user = _userRepository.AddOrGetUser(new() { Username = username }); ;
+            User? user = _userRepository.AddOrGetUser(username);
             return user;
         }
     }
