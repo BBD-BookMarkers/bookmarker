@@ -30,12 +30,20 @@ public class GetSelectedText
         return viewHost;
     }
 
-    ITextDocument GetTextDocumentForView(IWpfTextViewHost viewHost)
+    public string GetFilePath(IWpfTextView textView)
     {
+        if (textView == null)
+            throw new ArgumentNullException(nameof(textView));
+
         ITextDocument document;
-        viewHost.TextView.TextDataModel.DocumentBuffer.Properties.TryGetProperty(typeof(ITextDocument), out document);
-        return document;
+        if (textView.TextBuffer.Properties.TryGetProperty(typeof(ITextDocument), out document))
+        {
+            return document.FilePath;
+        }
+
+        return null;
     }
+
 
     public ITextSelection GetSelection(IWpfTextViewHost viewHost)
     {
