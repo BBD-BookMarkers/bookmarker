@@ -14,7 +14,7 @@ permissions:
 
 jobs:
     deploy-to-ec2:
-        runs-on: ububtu-latest
+        runs-on: ubuntu-latest
 
         steps:
         - name: Checkout Code
