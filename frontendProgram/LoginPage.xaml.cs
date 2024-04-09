@@ -116,7 +116,8 @@ public partial class LoginPage : ContentPage
             else
             {
                 messageService.sendMessage(token);
-                Request.setBearerToken(token);
+                Request.setBearerToken(token.Split("&")[0]);
+                string user_name = await Request.getUserName();
                 await Navigation.PopModalAsync();
             }
         };

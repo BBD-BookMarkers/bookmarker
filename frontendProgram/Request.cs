@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 namespace frontendProgram.Requests
 {
     public class Request
@@ -12,8 +15,10 @@ namespace frontendProgram.Requests
         private static string client_id = "0a93c763bd40398b525f";
         private static string githubLoginURL = "https://github.com/login/device/code";
         private static string AccessTokenURL = "https://github.com/login/oauth/access_token";
+        private static string userInfoURL = " https://api.github.com/user";
         private static string grantType = "urn:ietf:params:oauth:grant-type:device_code";
         private static string? bearerToken;
+        private static string? user_name;
         public static string getUserCode(string full_device_code)
         {
             string[] parts = full_device_code.Split('&');
@@ -26,6 +31,14 @@ namespace frontendProgram.Requests
             string device_code = parts[0].Split("=")[1];
             return (device_code);
         }
+        public static string getUsername()
+        {
+            return user_name;
+        }
+        public static void setUsername(string newUserName)
+        {
+            user_name = newUserName;
+        }
 
         public static void setBearerToken(string new_bearerToken)
         {
@@ -35,6 +48,48 @@ namespace frontendProgram.Requests
         public static string getBearerToken()
         {
             return bearerToken;
+        }
+
+       public static async Task<string> getUserName()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var request = new HttpRequestMessage()
+                {
+                    RequestUri = new Uri(userInfoURL),
+                    Method = HttpMethod.Get,
+                };
+                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", bearerToken);
+                request.Headers.UserAgent.ParseAdd("Bookmarkers/1.0.0 (Microsoft MAUI; .NET 6.0; Windows 10)");
+
+                try
+                {
+                    HttpResponseMessage response = await client.SendAsync(request);
+                    if(response.IsSuccessStatusCode)
+                    {
+                        var content = await response.Content.ReadAsStreamAsync();
+
+                        using (JsonDocument jsonDocument = await JsonDocument.ParseAsync(content))
+                        {
+                            JsonElement root = jsonDocument.RootElement;
+                            string username = root.GetProperty("login").GetString();
+                            setUsername(username);
+                            return(username);
+
+                        }
+                    }
+                    else
+                    {
+                        string content = await response.Content.ReadAsStringAsync();
+                        return ("failed request: " + response.StatusCode.ToString());
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    return ("Error "+ex);
+                }
+            }
         }
        public static async Task<string> GetDeviceCode()
         {

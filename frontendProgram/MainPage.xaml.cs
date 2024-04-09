@@ -32,7 +32,10 @@ namespace frontendProgram
         private void checkLogin()
         {
             Debug.WriteLine("Bearer Token: "+Request.getBearerToken());
-
+            if(Request.getUsername() != null)
+            {
+                welcomeMessage.Text = "Welcome "+Request.getUsername();
+            }
             if (Request.getBearerToken() != null)
             {
                 Login.Text = "Logout";
@@ -45,6 +48,8 @@ namespace frontendProgram
         {
             Login.Clicked -= logout;
             Login.Text = "Login";
+            welcomeMessage.Text = "Welcome";
+            Request.setUsername(null);
             Request.setBearerToken(null);
             Login.Clicked += Login_Clicked;
         }

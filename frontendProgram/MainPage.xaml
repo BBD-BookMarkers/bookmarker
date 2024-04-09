@@ -9,7 +9,7 @@
         <VerticalStackLayout 
             Padding="30,0"
             Spacing="25">
-            <Label Text="Home" MaximumHeightRequest="90" FontSize="35" FontFamily="" TextColor="White"></Label>
+            <Label Text="Welcome" MaximumHeightRequest="90" FontSize="35" FontFamily="" TextColor="White" x:Name="welcomeMessage"></Label>
 
             <Frame BorderColor = "Silver" BackgroundColor="Black">
                 <Grid>
