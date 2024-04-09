@@ -8,6 +8,10 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using frontendProgram.Bookmarks;
+using frontendProgram.Routes;
+using System.Net.Http.Json;
+using System.Text.Json.Nodes;
 namespace frontendProgram.Requests
 {
     public class Request
@@ -60,7 +64,51 @@ namespace frontendProgram.Requests
             return bearerToken;
         }
 
+        public static async Task<Dictionary<int, Bookmark>> getBookmarks()
+        {
 
+            Dictionary<int,Bookmark> ret = new Dictionary<int,Bookmark>();
+            using (HttpClient client = new HttpClient())
+            {
+                string url = apiURL + "/api/Bookmark";
+                var request= new HttpRequestMessage(HttpMethod.Get, url);
+
+                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", jwt);
+                request.Headers.UserAgent.ParseAdd("Bookmarkers/1.0.0 (Microsoft MAUI; .NET 6.0; Windows 10)");
+
+                try
+                {
+                    HttpResponseMessage response = await client.SendAsync(request);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var body= await response.Content.ReadAsStringAsync();
+                        JsonObject[] bookmarks = JsonSerializer.Deserialize<JsonObject[]>(body);
+
+                        foreach (var obj in bookmarks)
+                        {
+                            int tempRouteID = (int)obj["route"]["routeId"];
+                            int lineNumber = (int)obj["route"]["lineNumber"];
+                            string path = (string)obj["route"]["filePath"];
+
+                            Route tempRoute = new Route(tempRouteID, lineNumber, path);
+
+                            int bookmarkID = (int)obj["bookmarkId"];
+                            int userID = (int)obj["userId"];
+                            string name= (string)obj["name"];
+                            string dateCreated= (string)obj["dateCreated"];
+
+                            DateTime parsedDate= DateTime.Parse(dateCreated);
+                            Bookmark tempBookmark = new Bookmark(bookmarkID, userID, tempRouteID,name, parsedDate, tempRoute);
+                            ret.Add(bookmarkID, tempBookmark);
+                        }
+                    }
+                }catch (Exception ex) { 
+                    Debug.WriteLine(ex);
+                }
+
+            }
+            return (ret);
+        }
         public static async Task newJWT()
         {
             using (HttpClient client = new HttpClient())
@@ -161,7 +209,24 @@ namespace frontendProgram.Requests
             }
         }
 
+        public static async Task deleteBookmark(int bookmarkID)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                string url = apiURL + "/api/Bookmark?bookmarkId=" +bookmarkID.ToString();
+                var request = new HttpRequestMessage(HttpMethod.Delete, url);
+                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", jwt);
+                request.Headers.UserAgent.ParseAdd("Bookmarkers/1.0.0 (Microsoft MAUI; .NET 6.0; Windows 10)");
 
+                try
+                {
+                    HttpResponseMessage response = await client.SendAsync(request);
+
+                }catch (Exception ex) {
+                    Debug.WriteLine(ex);
+                }
+            }
+        }
         public static async Task<string> AuthorizeLogin(string device_code)
         {
             using (HttpClient client = new HttpClient()) {

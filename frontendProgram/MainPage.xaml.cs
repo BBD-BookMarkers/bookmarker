@@ -21,16 +21,17 @@ namespace frontendProgram
 
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
-            Bookmarks = new Dictionary<int, Bookmark>();
-            fillDictionary();
+            await fillDictionary();
             checkLogin();
             loadBookmarks();
         }
         private void checkLogin()
         {
+            Debug.WriteLine("Bearer Token: "+Request.getBearerToken());
+            Debug.WriteLine("JWT: " + Request.getJWT());
             if(Request.getUsername() != null)
             {
                 welcomeMessage.Text = "Welcome "+Request.getUsername();
@@ -43,7 +44,7 @@ namespace frontendProgram
             }
         }
 
-        private void logout(object sender, EventArgs e)
+        private async void logout(object sender, EventArgs e)
         {
             Login.Clicked -= logout;
             Login.Text = "Login";
@@ -52,33 +53,27 @@ namespace frontendProgram
             Request.setBearerToken(null);
             Request.setJWT(null);
             Login.Clicked += Login_Clicked;
+            await refreshList();
         }
-        private void refreshList()
+        private async Task refreshList()
         {
+            await fillDictionary();
             TableOfBookmarks.Children.Clear();
             loadBookmarks();
         }
 
-        private void fillDictionary()
+        private async Task fillDictionary()
         {
-            //This is a temporary function that just fills the dictionary with test data
-
-            Random random = new Random();
-
-
-            for (int i = 0; i < 50; i++)
+            Bookmarks= new Dictionary<int, Bookmark>();
+            if(Request.getJWT() != null)
             {
-                int routeID = random.Next(1, 51);
-                Route tempRoute = new Route(routeID, random.Next(1, 51), "C:\\Users\\bbdnet3169\\Desktop\\install the cli.txt");
-                Bookmark tempBookmark = new Bookmark(i, random.Next(1, 51), routeID, "Cool as fuck for loop " + i.ToString(), DateTime.Parse("2024-04-06"), tempRoute);
-
-                Bookmarks.Add(tempBookmark.BookmarkId, tempBookmark);
+                Bookmarks = await Request.getBookmarks();
             }
+            
+          
         }
         private void loadBookmarks()
         {
-            //this will call the backend to get all the bookmarks for a given user and then populate the ui with this info
-            //for now it looks through the current array of items and adds them to the ui
 
             foreach (int bookmarkKey in Bookmarks.Keys)
             {
@@ -150,17 +145,15 @@ namespace frontendProgram
             await Navigation.PushModalAsync(popup);
         }
 
-        private void Delete_Entry(object sender, EventArgs e, int bookmarkID)
+        private async void Delete_Entry(object sender, EventArgs e, int bookmarkID)
         {
-            //eventually this will send a delete request to the database
-            //for now it just deletes it from the array and refreshes the uii
-            Bookmarks.Remove(bookmarkID);
-            refreshList();
+            await Request.deleteBookmark(bookmarkID);
+            await refreshList();
         }
 
-        private void Refresh_Clicked(object sender, EventArgs e)
+        private async void Refresh_Clicked(object sender, EventArgs e)
         {
-            refreshList();
+           await refreshList();
         }
     }
 

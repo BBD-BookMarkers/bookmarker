@@ -26,7 +26,7 @@
 
             <Frame BorderColor="Silver" BackgroundColor="Black">
                 <ScrollView Orientation="Vertical">
-                    <VerticalStackLayout x:Name="TableOfBookmarks">
+                    <VerticalStackLayout x:Name="TableOfBookmarks" MinimumHeightRequest="450">
                     </VerticalStackLayout>
                 </ScrollView>
             </Frame>
