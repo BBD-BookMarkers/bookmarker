@@ -4,6 +4,7 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Shared.Models
 {
+    [Table("Bookmark")]
     public class Bookmark
     {
         [SwaggerSchema(ReadOnly = true)]
@@ -12,6 +13,7 @@ namespace Shared.Models
         [SwaggerSchema(ReadOnly = true)]
         public int RouteId { get; set; }
         public required string Name { get; set; }
+        [Column("createdDate")]
         public DateTime DateCreated { get; set; }
         public required Route Route { get; set; }
     }
