@@ -1,13 +1,12 @@
 name: Client UI Release
 
 on: 
-    pull_request:
-        branches:
-            - dev
-    push:
-        branches:
-            - main
-            - dev
+  pull_request:
+    branches:
+      - main
+      - dev
+    paths:
+        - "frontendProgram/**"
 
 jobs:
    make-release:
