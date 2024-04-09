@@ -8,6 +8,11 @@ The api can be run with the following commands:
 dotnet dev-certs https --trust
 ```
 This command will possibly bring up a dialog to accept the certificate, choose yes.
+Ensure that your dotnet user secrets are set up with the correct values. The two keys required are:
+
+- Jwt:Key
+- ConnectionStrings:DefaultConnection
+
 Then run:
 ```bash
 dotnet run
