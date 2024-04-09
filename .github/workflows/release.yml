@@ -40,8 +40,6 @@ jobs:
             repo_token: ${{ secrets.GITHUB_TOKEN }}
             automatic_release_tag: "latest"
             prerelease: false
-            title: "Extra Extra! Get your new release!"
+            title: "Windows UI release"
             files: |
               frontendProgram/bin/Release/*
-
-            
