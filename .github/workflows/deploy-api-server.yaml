@@ -5,6 +5,8 @@ on:
         branches:
             - main
             - dev
+        paths:
+            - "Api/**"
 
 permissions:
     contents: read
