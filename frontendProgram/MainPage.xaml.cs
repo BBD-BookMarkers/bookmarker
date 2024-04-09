@@ -31,7 +31,6 @@ namespace frontendProgram
         }
         private void checkLogin()
         {
-            Debug.WriteLine("Bearer Token: "+Request.getBearerToken());
             if(Request.getUsername() != null)
             {
                 welcomeMessage.Text = "Welcome "+Request.getUsername();
@@ -51,6 +50,7 @@ namespace frontendProgram
             welcomeMessage.Text = "Welcome";
             Request.setUsername(null);
             Request.setBearerToken(null);
+            Request.setJWT(null);
             Login.Clicked += Login_Clicked;
         }
         private void refreshList()

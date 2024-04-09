@@ -19,6 +19,8 @@ namespace frontendProgram.Requests
         private static string grantType = "urn:ietf:params:oauth:grant-type:device_code";
         private static string? bearerToken;
         private static string? user_name;
+        private static string? jwt;
+        private static string apiURL = "http://bookmark.phipson.co.za:5170";
         public static string getUserCode(string full_device_code)
         {
             string[] parts = full_device_code.Split('&');
@@ -30,6 +32,14 @@ namespace frontendProgram.Requests
             string[] parts = full_device_code.Split('&');
             string device_code = parts[0].Split("=")[1];
             return (device_code);
+        }
+        public static void setJWT(string JWT)
+        {
+            jwt = JWT;
+        }
+        public static string getJWT()
+        {
+            return jwt;
         }
         public static string getUsername()
         {
@@ -50,6 +60,37 @@ namespace frontendProgram.Requests
             return bearerToken;
         }
 
+
+        public static async Task newJWT()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                string queryURL = apiURL + "/api/login?username=" + user_name + "&githubToken=" + bearerToken;
+                try
+                {
+                    HttpResponseMessage response = await client.PostAsync(queryURL + "/api/Login",null);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var body = await response.Content.ReadAsStreamAsync();
+                        using (JsonDocument jsonDocument = await JsonDocument.ParseAsync(body))
+                        {
+                            JsonElement root = jsonDocument.RootElement;
+                            string JWT = root.GetProperty("token").GetString();
+                            setJWT(JWT);
+
+                        }
+                    }
+                    else
+                    {
+                        string body=await response.Content.ReadAsStringAsync();
+                        Debug.WriteLine(body);
+                    }
+                }catch(Exception e)
+                {
+                    Debug.WriteLine(e);
+                }
+            }
+        }
        public static async Task<string> getUserName()
         {
             using (HttpClient client = new HttpClient())
