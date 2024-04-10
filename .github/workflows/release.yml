@@ -38,7 +38,7 @@ jobs:
           run: |
             cd frontendProgram
             dotnet workload restore
-            dotnet publish -f net8.0-windows10.0.19041.0 -p:RuntimeIdentifierOverride=win10-x64 -p:PackageCertificateThumbprint="${{ secrets.WINDOWS_PFX_THUMBPRINT }}"
+            dotnet publish -f net8.0-windows10.0.19041.0 -p:RuntimeIdentifierOverride=win10-x64 -p:PackageCertificateThumbprint="${{ secrets.WINDOWS_PFX_THUMBPRINT }}" --output ./published
 
         - name: Create release
           uses: "marvinpinto/action-automatic-releases@latest"
@@ -48,4 +48,4 @@ jobs:
             prerelease: false
             title: "Windows UI"
             files: |
-              frontendProgram/bin/Release/*
+              ./published
