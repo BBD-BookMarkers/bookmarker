@@ -29,8 +29,6 @@ namespace frontendProgram
         }
         private void checkLogin()
         {
-            Debug.WriteLine("Bearer Token: "+Request.getBearerToken());
-            Debug.WriteLine("JWT: " + Request.getJWT());
             if(Request.getUsername() != null)
             {
                 welcomeMessage.Text = "Welcome "+Request.getUsername();

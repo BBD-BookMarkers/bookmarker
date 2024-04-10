@@ -122,7 +122,17 @@ public partial class LoginPage : ContentPage
                 await Navigation.PopModalAsync();
             }
         };
+
+        Button backButton = new Button();
+        backButton.Margin = 10;
+        backButton.Text = "Back";
+
+        backButton.Clicked += async (s, e) =>
+        {
+            await Navigation.PopModalAsync();
+        };
         LoginLayout.Children.Add(loggedIn);
+        LoginLayout.Children.Add(backButton);
         await launchGithub();
 
 
