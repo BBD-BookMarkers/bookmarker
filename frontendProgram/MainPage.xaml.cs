@@ -80,7 +80,7 @@ namespace frontendProgram
 
                 var button = new Button
                 {
-                    Text = Bookmarks[bookmarkKey].Name,
+                    Text =Bookmarks[bookmarkKey].DateCreated.ToString()+"\t"+Bookmarks[bookmarkKey].Name+"\tLine Number: " + Bookmarks[bookmarkKey].Route.LineNumber,
                     TextColor = Color.Parse("Black"),
                     Margin = 2,
                     BackgroundColor = Color.FromArgb("#ac99ea"),
