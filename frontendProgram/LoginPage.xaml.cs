@@ -91,7 +91,7 @@ public partial class LoginPage : ContentPage
         Button loggedIn = new Button();
         loggedIn.Margin = 10;
         loggedIn.Text = "I have logged in :)";
-
+        loggedIn.BackgroundColor = Color.FromArgb("#ac99ea");
 
         loggedIn.Clicked += async (s, e) =>
         {
@@ -126,7 +126,7 @@ public partial class LoginPage : ContentPage
         Button backButton = new Button();
         backButton.Margin = 10;
         backButton.Text = "Back";
-
+        backButton.BackgroundColor = Color.FromArgb("#ac99ea");
         backButton.Clicked += async (s, e) =>
         {
             await Navigation.PopModalAsync();
