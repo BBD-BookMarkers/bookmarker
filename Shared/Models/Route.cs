@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Shared.Models
 {
     [Table("Route")]
-    public class BookmarkRoute
+    public class Route
     {
         [SwaggerSchema(ReadOnly = true)]
         public int RouteId { get; set; }
