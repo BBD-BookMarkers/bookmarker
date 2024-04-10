@@ -1,14 +1,13 @@
 name: Client UI Release
 
 on: 
-    pull_request:
-        branches:
-            - dev
-    push:
-        branches:
-            - main
-            - dev
-
+  push:
+    branches:
+      - main
+      - dev
+    paths:
+        - "frontendProgram/**"
+        - ".github/workflows/release.yml"
 jobs:
    make-release:
         runs-on: windows-latest
@@ -27,12 +26,19 @@ jobs:
         - name: Install Maui
           run: dotnet workload install maui
 
+        - name: Decrypt PFX file
+          run: |
+            echo "${{ secrets.WINDOWS_PFX_FILE }}" > cert.pfx.asc
+            certutil -decode cert.pfx.asc cert.pfx
+
+        - name: Add certificate to store
+          run: certutil -user -q -p ${{ secrets.WINDOWS_PFX_PASSWORD }} -importpfx cert.pfx NoRoot
+
         - name: Build and publish project
           run: |
+            cd frontendProgram
             dotnet workload restore
-            dotnet build -c Release "./frontendProgram/Maui Front End.csproj"
-            dotnet publish -f net8.0-windows10.0.19041.0 -c Release "./frontendProgram/Maui Front End.csproj"
-        
+            dotnet publish -f net8.0-windows10.0.19041.0 -p:RuntimeIdentifierOverride=win10-x64 -p:PackageCertificateThumbprint="${{ secrets.WINDOWS_PFX_THUMBPRINT }}"
 
         - name: Create release
           uses: "marvinpinto/action-automatic-releases@latest"
@@ -40,8 +46,6 @@ jobs:
             repo_token: ${{ secrets.GITHUB_TOKEN }}
             automatic_release_tag: "latest"
             prerelease: false
-            title: "Extra Extra! Get your new release!"
+            title: "Windows UI"
             files: |
-              frontendProgram/bin/Release/*
-
-            
+              ./frontendProgram/bin/Release/net8.0-windows10.0.19041.0/win10-x64/AppPackages/*/*

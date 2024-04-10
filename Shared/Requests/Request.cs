@@ -1,16 +1,9 @@
 ﻿using Shared.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Net.Http;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Net.Http.Json;
 using System.Text.Json.Nodes;
+
 namespace Shared.Requests
 {
     public class Request
@@ -66,11 +59,11 @@ namespace Shared.Requests
         public static async Task<Dictionary<int, Bookmark>> getBookmarks()
         {
 
-            Dictionary<int,Bookmark> ret = new Dictionary<int,Bookmark>();
+            Dictionary<int, Bookmark> ret = new Dictionary<int, Bookmark>();
             using (HttpClient client = new HttpClient())
             {
                 string url = apiURL + "/api/Bookmark";
-                var request= new HttpRequestMessage(HttpMethod.Get, url);
+                var request = new HttpRequestMessage(HttpMethod.Get, url);
 
                 request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", jwt);
                 request.Headers.UserAgent.ParseAdd("Bookmarkers/1.0.0 (Microsoft MAUI; .NET 6.0; Windows 10)");
@@ -80,7 +73,7 @@ namespace Shared.Requests
                     HttpResponseMessage response = await client.SendAsync(request);
                     if (response.IsSuccessStatusCode)
                     {
-                        var body= await response.Content.ReadAsStringAsync();
+                        var body = await response.Content.ReadAsStringAsync();
                         JsonObject[] bookmarks = JsonSerializer.Deserialize<JsonObject[]>(body);
 
                         foreach (var obj in bookmarks)
@@ -89,26 +82,35 @@ namespace Shared.Requests
                             int lineNumber = (int)obj["route"]["lineNumber"];
                             string path = (string)obj["route"]["filePath"];
 
-                            Route tempRoute = new Route {
-                                RouteId=tempRouteID,
-                                LineNumber=lineNumber,
-                                FilePath=path
 
+                            /* Unmerged change from project 'Api'
+                            Before:
+                                                        BookmarkRoute tempRoute = new BookmarkRoute {
+                            After:
+                                                        Models.Route tempRoute = new Models.Route {
+                            */
+                            Models.Route tempRoute = new()
+                            {
+                                RouteId = tempRouteID,
+                                LineNumber = lineNumber,
+                                FilePath = path
                             };
 
                             int bookmarkID = (int)obj["bookmarkId"];
                             int userID = (int)obj["userId"];
-                            string name= (string)obj["name"];
-                            string dateCreated= (string)obj["dateCreated"];
+                            string name = (string)obj["name"];
+                            string dateCreated = (string)obj["dateCreated"];
 
-                            DateTime parsedDate= DateTime.Parse(dateCreated);
+                            DateTime parsedDate = DateTime.Parse(dateCreated);
 
 
                             Bookmark tempBookmark = new Bookmark { BookmarkId = bookmarkID, UserId = userID, Name = name, DateCreated = parsedDate, RouteId = tempRouteID, Route = tempRoute };
                             ret.Add(bookmarkID, tempBookmark);
                         }
                     }
-                }catch (Exception ex) { 
+                }
+                catch (Exception ex)
+                {
                     Debug.WriteLine(ex);
                 }
 
@@ -122,7 +124,7 @@ namespace Shared.Requests
                 string queryURL = apiURL + "/api/login?username=" + user_name + "&githubToken=" + bearerToken;
                 try
                 {
-                    HttpResponseMessage response = await client.PostAsync(queryURL + "/api/Login",null);
+                    HttpResponseMessage response = await client.PostAsync(queryURL + "/api/Login", null);
                     if (response.IsSuccessStatusCode)
                     {
                         var body = await response.Content.ReadAsStreamAsync();
@@ -136,16 +138,17 @@ namespace Shared.Requests
                     }
                     else
                     {
-                        string body=await response.Content.ReadAsStringAsync();
+                        string body = await response.Content.ReadAsStringAsync();
                         Debug.WriteLine(body);
                     }
-                }catch(Exception e)
+                }
+                catch (Exception e)
                 {
                     Debug.WriteLine(e);
                 }
             }
         }
-       public static async Task<string> getUserName()
+        public static async Task<string> getUserName()
         {
             using (HttpClient client = new HttpClient())
             {
@@ -160,7 +163,7 @@ namespace Shared.Requests
                 try
                 {
                     HttpResponseMessage response = await client.SendAsync(request);
-                    if(response.IsSuccessStatusCode)
+                    if (response.IsSuccessStatusCode)
                     {
                         var content = await response.Content.ReadAsStreamAsync();
 
@@ -169,7 +172,7 @@ namespace Shared.Requests
                             JsonElement root = jsonDocument.RootElement;
                             string username = root.GetProperty("login").GetString();
                             setUsername(username);
-                            return(username);
+                            return (username);
 
                         }
                     }
@@ -182,18 +185,18 @@ namespace Shared.Requests
                 }
                 catch (Exception ex)
                 {
-                    return ("Error "+ex);
+                    return ("Error " + ex);
                 }
             }
         }
-       public static async Task<string> GetDeviceCode()
+        public static async Task<string> GetDeviceCode()
         {
-        using (HttpClient client = new HttpClient())
+            using (HttpClient client = new HttpClient())
             {
                 string key = "client_id";
                 string jsonData = $"{{\"{key}\": \"{client_id}\"}}";
-                StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json"); 
-                
+                StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
                 try
                 {
                     HttpResponseMessage response = await client.PostAsync(githubLoginURL, content);
@@ -206,9 +209,10 @@ namespace Shared.Requests
                     }
                     else
                     {
-                        return ("Error: "+response.StatusCode);
+                        return ("Error: " + response.StatusCode);
                     }
-                }catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
                     return "Exception: " + ex.Message;
                 }
@@ -219,7 +223,7 @@ namespace Shared.Requests
         {
             using (HttpClient client = new HttpClient())
             {
-                string url = apiURL + "/api/Bookmark?bookmarkId=" +bookmarkID.ToString();
+                string url = apiURL + "/api/Bookmark?bookmarkId=" + bookmarkID.ToString();
                 var request = new HttpRequestMessage(HttpMethod.Delete, url);
                 request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", jwt);
                 request.Headers.UserAgent.ParseAdd("Bookmarkers/1.0.0 (Microsoft MAUI; .NET 6.0; Windows 10)");
@@ -228,14 +232,17 @@ namespace Shared.Requests
                 {
                     HttpResponseMessage response = await client.SendAsync(request);
 
-                }catch (Exception ex) {
+                }
+                catch (Exception ex)
+                {
                     Debug.WriteLine(ex);
                 }
             }
         }
         public static async Task<string> AuthorizeLogin(string device_code)
         {
-            using (HttpClient client = new HttpClient()) {
+            using (HttpClient client = new HttpClient())
+            {
                 string[] keys = { "client_id", "device_code", "grant_type" };
                 string jsonObject = $"{{\"{keys[0]}\": \"{client_id}\", \"{keys[1]}\": \"{device_code}\", \"{keys[2]}\": \"{grantType}\"}}";
 
@@ -254,9 +261,10 @@ namespace Shared.Requests
                     {
                         return ("Login Error: " + response.StatusCode);
                     }
-                }catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
-                    return(ex.Message);
+                    return (ex.Message);
                 }
             }
         }
