@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using frontendProgram.Routes;
 namespace frontendProgram.Bookmarks
 {
-
     public class Bookmark
     {
         private int bookmarkId;
@@ -63,4 +62,4 @@ namespace frontendProgram.Bookmarks
         }
     }
 }
- 
+
