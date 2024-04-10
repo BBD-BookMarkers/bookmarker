@@ -71,5 +71,10 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
+
+	<ItemGroup Condition="$(TargetFramework.Contains('-windows')) != true">
+  	<Compile Remove="**\*.Windows.cs" />
+  	<None Include="**\*.Windows.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+	</ItemGroup>
 	<Import Project="..\Shared\Shared.projitems" Label="Shared" />
 </Project>

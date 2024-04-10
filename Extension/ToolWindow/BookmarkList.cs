@@ -9,7 +9,7 @@ namespace ToolWindow
 {
     public class NewBookmark
     {
-        private ArrayList bookmarks = new ArrayList();
+        private Dictionary<int, Bookmark> Bookmarks;
 
         public NewBookmark CreateBookmark(int userId, string name, int lineNumber, string filePath)
         {

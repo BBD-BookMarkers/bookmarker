@@ -15,8 +15,6 @@ namespace frontendProgram
         public MainPage()
         {
             InitializeComponent();
-            
-
 
         }
 

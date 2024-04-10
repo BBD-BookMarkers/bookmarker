@@ -4,6 +4,7 @@ using System;
 using System.ComponentModel.Design;
 using System.Windows;
 using Shared.Models;
+using Shared.Requests;
 using Task = System.Threading.Tasks.Task;
 
 namespace ToolWindow
