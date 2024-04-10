@@ -89,7 +89,7 @@ namespace Shared.Requests
                             int lineNumber = (int)obj["route"]["lineNumber"];
                             string path = (string)obj["route"]["filePath"];
 
-                            Route tempRoute = new Route {
+                            BookmarkRoute tempRoute = new BookmarkRoute {
                                 RouteId=tempRouteID,
                                 LineNumber=lineNumber,
                                 FilePath=path
