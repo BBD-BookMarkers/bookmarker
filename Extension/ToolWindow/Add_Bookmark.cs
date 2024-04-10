@@ -82,9 +82,9 @@ namespace ToolWindow
             {
                 // UserId = 0;
                 // RouteId = route.id,
-                // Name = result,
-                // DateCreaetd = dateCreated,
-                // Route = route,
+                Name = result,
+                DateCreaetd = dateCreated,
+                Route = route,
             };
 
             // Add the bookmark to the list of bookmarks
