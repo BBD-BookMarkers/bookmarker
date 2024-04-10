@@ -31,8 +31,7 @@ jobs:
             cd frontendProgram
             dotnet workload restore
             dotnet build -f net8.0-windows10.0.19041.0 -c Release -p:RuntimeIdentifierOverride=win10-x64
-            dotnet build -c Release "./frontendProgram/Maui Front End.csproj"
-            dotnet publish -f net8.0-windows10.0.19041.0 -c Release "./frontendProgram/Maui Front End.csproj"
+            dotnet publish -f net8.0-windows10.0.19041.0 -c Release
         
 
         - name: Create release
