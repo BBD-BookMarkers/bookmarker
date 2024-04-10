@@ -48,4 +48,4 @@ jobs:
             prerelease: false
             title: "Windows UI"
             files: |
-              ".\**\AppPackages\**\*.*"
+              *.msix
