@@ -14,7 +14,7 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="Auto" MinHeight="85"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Your bookmarks:" FontSize="16" Margin="10" Grid.Row="0" />
+        <TextBlock Text="Your bookmarks:" FontSize="16" Margin="10" Grid.Row="0"/>
         <StackPanel x:Name="DynamicButtonStackPanel" Grid.Row="1" Margin="10" />
     </Grid>
 </UserControl>

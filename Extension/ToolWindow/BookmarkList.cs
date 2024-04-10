@@ -7,11 +7,11 @@ using System.Collections;
 
 namespace ToolWindow
 {
-    public class Bookmark
+    public class NewBookmark
     {
         private ArrayList bookmarks = new ArrayList();
 
-        public Bookmark CreateBookmark(int userId, string name, int lineNumber, string filePath)
+        public NewBookmark CreateBookmark(int userId, string name, int lineNumber, string filePath)
         {
             // Creating a new Route instance
             //var route = new Route

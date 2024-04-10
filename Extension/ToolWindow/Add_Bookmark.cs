@@ -1,13 +1,9 @@
 ﻿using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Interop;
-using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Editor;
 using System;
 using System.ComponentModel.Design;
-using System.Globalization;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
+using Shared.Models;
 using Task = System.Threading.Tasks.Task;
 
 namespace ToolWindow
@@ -64,12 +60,34 @@ namespace ToolWindow
             int startLine = selection.StreamSelectionSpan.SnapshotSpan.Start.GetContainingLine().LineNumber + 1; // 1-based
             string filePath = getSelectedText.GetFilePath(getSelectedText.GetCurrentViewHost().TextView);
             DateTime dateCreated = DateTime.Now;
-            MessageBox.Show(dateCreated.ToString());
-            // Display a popup where the user can input a name for the bookmark
-            // Create a new bookmark instance
+
+            string result = DialogLauncher.ShowDialog();
+            if (result == null)
+            {
+                return;
+            }
+
+
+
+            MessageBox.Show(result);
+
+
+            Route route = new Route
+            {
+                FilePath = filePath,
+                LineNumber = startLine,
+            };
+
+            Bookmark bookmark = new Bookmark
+            {
+                // UserId = 0;
+                // RouteId = route.id,
+                // Name = result,
+                // DateCreaetd = dateCreated,
+                // Route = route,
+            };
 
             // Add the bookmark to the list of bookmarks
-            
 
         }
     }

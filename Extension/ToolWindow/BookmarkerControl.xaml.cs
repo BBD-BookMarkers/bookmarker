@@ -34,7 +34,6 @@ namespace ToolWindow
             {
                 Button dynamicButton = new Button
                 {
-                    // set the roundness of the button
                     BorderThickness = new Thickness(0),
                     Content = item,
                     Width = 300,

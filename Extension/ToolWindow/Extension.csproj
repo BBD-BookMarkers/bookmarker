@@ -46,8 +46,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Add_Bookmark.cs" />
-    <Compile Include="Class1.cs" />
+    <Compile Include="BookmarkList.cs" />
+    <Compile Include="DialogueLauncher.cs" />
     <Compile Include="GetSelectedText.cs" />
+    <Compile Include="NameInput.xaml.cs">
+      <DependentUpon>NameInput.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Bookmarker.cs" />
     <Compile Include="BookmarkerCommand.cs" />
@@ -86,6 +90,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="NameInput.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Add_Bookmark.png" />
@@ -93,6 +101,12 @@
     <VSCTCompile Include="BookmarkerPackage.vsct">
       <ResourceName>Menus.ctmenu</ResourceName>
     </VSCTCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Api\Api.csproj">
+      <Project>{5E92E05C-6EAB-4BB8-8CA7-885F93524B32}</Project>
+      <Name>Api</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="'$(VSToolsPath)' != ''" />
