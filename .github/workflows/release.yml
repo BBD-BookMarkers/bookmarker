@@ -33,7 +33,11 @@ jobs:
             dotnet workload restore
             dotnet build -f net8.0-windows10.0.19041.0 -c Release -p:RuntimeIdentifierOverride=win10-x64
             dotnet publish -f net8.0-windows10.0.19041.0 -c Release
-        
+
+        - name: Zip build
+          run: |
+            Compress-Archive -Path frontendProgram/bin/Release/net8.0-windows10.0.19041.0/win10-x64/ -DestinationPath ./win10-x64.zip
+
         - name: Create release
           uses: "marvinpinto/action-automatic-releases@latest"
           with:
