@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Shared.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +9,9 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using frontendProgram.Bookmarks;
-using frontendProgram.Routes;
 using System.Net.Http.Json;
 using System.Text.Json.Nodes;
-namespace frontendProgram.Requests
+namespace Shared.Requests
 {
     public class Request
     {
@@ -90,7 +89,12 @@ namespace frontendProgram.Requests
                             int lineNumber = (int)obj["route"]["lineNumber"];
                             string path = (string)obj["route"]["filePath"];
 
-                            Route tempRoute = new Route(tempRouteID, lineNumber, path);
+                            Route tempRoute = new Route {
+                                RouteId=tempRouteID,
+                                LineNumber=lineNumber,
+                                FilePath=path
+
+                            };
 
                             int bookmarkID = (int)obj["bookmarkId"];
                             int userID = (int)obj["userId"];
@@ -98,7 +102,9 @@ namespace frontendProgram.Requests
                             string dateCreated= (string)obj["dateCreated"];
 
                             DateTime parsedDate= DateTime.Parse(dateCreated);
-                            Bookmark tempBookmark = new Bookmark(bookmarkID, userID, tempRouteID,name, parsedDate, tempRoute);
+
+
+                            Bookmark tempBookmark = new Bookmark { BookmarkId = bookmarkID, UserId = userID, Name = name, DateCreated = parsedDate, RouteId = tempRouteID, Route = tempRoute };
                             ret.Add(bookmarkID, tempBookmark);
                         }
                     }

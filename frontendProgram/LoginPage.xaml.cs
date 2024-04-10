@@ -1,4 +1,4 @@
-using frontendProgram.Requests;
+using Shared.Requests;
 using System.Diagnostics;
 namespace frontendProgram;
 

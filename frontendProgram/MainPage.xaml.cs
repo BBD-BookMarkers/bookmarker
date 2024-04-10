@@ -1,11 +1,10 @@
 ﻿using Microsoft.Maui.Controls;
 using System;
 using System.Diagnostics;
-using frontendProgram.Routes;
-using frontendProgram.Bookmarks;
+using Shared.Models;
 using System.Xml.Linq;
 using Microsoft.Extensions.Logging;
-using frontendProgram.Requests;
+using Shared.Requests;
 namespace frontendProgram
 {
     public partial class MainPage : ContentPage

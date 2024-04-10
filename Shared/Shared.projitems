@@ -12,5 +12,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Bookmark.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Route.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\User.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Requests\Request.cs" />
   </ItemGroup>
 </Project>
