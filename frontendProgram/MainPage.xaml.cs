@@ -10,8 +10,6 @@ namespace frontendProgram
     public partial class MainPage : ContentPage
     {
         private Dictionary<int, Bookmark> Bookmarks;
-        private MessageService MessageService;
-        private string bearertoken;
         public MainPage()
         {
             InitializeComponent();

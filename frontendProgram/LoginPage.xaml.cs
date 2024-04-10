@@ -4,7 +4,6 @@ namespace frontendProgram;
 
 public partial class LoginPage : ContentPage
 {
-    private MessageService messageService;
     private static string githubLoginURL = "https://github.com/login/device";
     private static ProcessStartInfo psi = new ProcessStartInfo
     {
@@ -16,7 +15,6 @@ public partial class LoginPage : ContentPage
     public LoginPage(string user_code, string device_code)
 	{
 		InitializeComponent();
-        this.messageService = new MessageService();
         onLoad(user_code,device_code);
     }
 
@@ -115,7 +113,6 @@ public partial class LoginPage : ContentPage
             }
             else
             {
-                messageService.sendMessage(token);
                 Request.setBearerToken(token.Split("&")[0]);
                 string user_name = await Request.getUserName();
                 await Request.newJWT();
