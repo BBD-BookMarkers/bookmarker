@@ -15,6 +15,6 @@ namespace Shared.Models
         public required string Name { get; set; }
         [Column("createdDate")]
         public DateTime DateCreated { get; set; }
-        public required BookmarkRoute Route { get; set; }
+        public required Route Route { get; set; }
     }
 }
