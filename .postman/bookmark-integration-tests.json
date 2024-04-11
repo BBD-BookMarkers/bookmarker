@@ -171,7 +171,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/api/login?username=dummyUser1&githubToken={{token}}",
+					"raw": "{{base_url}}/api/login?username=tristanphips&githubToken={{token}}",
 					"host": [
 						"{{base_url}}"
 					],
@@ -182,7 +182,7 @@
 					"query": [
 						{
 							"key": "username",
-							"value": "dummyUser1"
+							"value": "tristanphips"
 						},
 						{
 							"key": "githubToken",
@@ -200,14 +200,13 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "5bcd7fef-a639-41cd-af9f-6ae4644fc10d",
 						"exec": [
 							"pm.test(\"Getting user data\", function () {",
-							"    pm.expect(pm.response.text()).to.include(\"dummyUser1\");",
+							"    pm.expect(pm.response.text()).to.include(\"tristanphips\");",
 							"});"
 						],
-						"type": "text/javascript",
-						"packages": {},
-						"id": "5bcd7fef-a639-41cd-af9f-6ae4644fc10d"
+						"type": "text/javascript"
 					}
 				}
 			],
