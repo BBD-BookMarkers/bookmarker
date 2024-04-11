@@ -103,7 +103,6 @@ namespace Shared.Requests
 
                             DateTime parsedDate = DateTime.Parse(dateCreated);
 
-
                             Bookmark tempBookmark = new Bookmark { BookmarkId = bookmarkID, UserId = userID, Name = name, DateCreated = parsedDate, RouteId = tempRouteID, Route = tempRoute };
                             ret.Add(bookmarkID, tempBookmark);
                         }
