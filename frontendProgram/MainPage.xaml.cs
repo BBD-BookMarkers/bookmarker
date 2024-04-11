@@ -10,8 +10,6 @@ namespace frontendProgram
     public partial class MainPage : ContentPage
     {
         private Dictionary<int, Bookmark> Bookmarks;
-        private MessageService MessageService;
-        private string bearertoken;
         public MainPage()
         {
             InitializeComponent();
@@ -29,8 +27,6 @@ namespace frontendProgram
         }
         private void checkLogin()
         {
-            Debug.WriteLine("Bearer Token: "+Request.getBearerToken());
-            Debug.WriteLine("JWT: " + Request.getJWT());
             if(Request.getUsername() != null)
             {
                 welcomeMessage.Text = "Welcome "+Request.getUsername();
@@ -82,7 +78,7 @@ namespace frontendProgram
 
                 var button = new Button
                 {
-                    Text = Bookmarks[bookmarkKey].Name,
+                    Text =Bookmarks[bookmarkKey].DateCreated.ToString()+"\t"+Bookmarks[bookmarkKey].Name+"\tLine Number: " + Bookmarks[bookmarkKey].Route.LineNumber,
                     TextColor = Color.Parse("Black"),
                     Margin = 2,
                     BackgroundColor = Color.FromArgb("#ac99ea"),
