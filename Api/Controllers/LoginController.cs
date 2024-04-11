@@ -6,6 +6,9 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Net.Http.Headers;
+using System.Text.Json.Nodes;
+using System.Text.Json;
 
 namespace Api.Controllers
 {
@@ -24,10 +27,10 @@ namespace Api.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult Login(string username, string githubToken)
+        public async Task<IActionResult> Login(string username, string githubToken)
         {
-            IActionResult response = Unauthorized();
-            var user = AuthenticateUser(username, githubToken);
+            IActionResult response = Unauthorized("Missing or invalid github token");
+            var user = await AuthenticateUser(username, githubToken);
 
             if (user != null)
             {
@@ -63,9 +66,30 @@ namespace Api.Controllers
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        private User? AuthenticateUser(string username, string githubToken)
+        private async Task<User> AuthenticateUser(string username, string githubToken)
         {
-            // Validate user's github token to authenticate user
+            string githubUserLink = "https://api.github.com/user";
+            var client = new HttpClient();
+            var request = new HttpRequestMessage(HttpMethod.Get, githubUserLink);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", githubToken);
+            request.Headers.UserAgent.ParseAdd("Bookmarker API");
+
+            HttpResponseMessage response = await client.SendAsync(request);
+
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return null;
+            }
+
+            var body = await response.Content.ReadAsStringAsync();
+
+            JsonObject userInfo = JsonSerializer.Deserialize<JsonObject>(body);
+            string githubUsername = userInfo["login"].ToString();
+
+            if (username != githubUsername)
+                return null;
+
             User? user = _userRepository.AddOrGetUser(username);
             return user;
         }
