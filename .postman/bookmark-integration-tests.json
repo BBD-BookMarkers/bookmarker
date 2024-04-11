@@ -1,0 +1,513 @@
+{
+	"info": {
+		"_postman_id": "24cb0e5c-c0ac-48c3-a59c-b1fcf8fb05be",
+		"name": "Bookmark Integration Tests",
+		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Tests\" tab**\n\nTests help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/b5f280a7-4b09-48ec-857f-0a7ed99d7ef8/U2NyZWVuc2hvdCAyMDIzLTAzLTI3IGF0IDkuNDcuMjggUE0ucG5n\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) in \"Tests\" to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Ping",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    pm.test(\"Ping Successful - Health is Green\", function () {",
+							"        pm.expect(pm.response.text()).to.include(\"Pong.\");",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"id": "01c57532-ca4c-4f0f-9879-b759b9e89711"
+					}
+				}
+			],
+			"id": "cf511d31-e3ed-48ab-81b1-57f435f851ce",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{base_url}}/api/ping",
+				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Data - no token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Rejected - Status code is 401\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"id": "e96b71a6-405e-4b66-ad52-a9d2ed36de8a"
+					}
+				}
+			],
+			"id": "4200385d-6a19-4b3b-b5c4-5e43d6957b24",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{base_url}}/api/User"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Bookmark - no token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 401 - rejected\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"id": "d6b7f6d9-a352-452e-8294-1734ed11c380"
+					}
+				}
+			],
+			"id": "14998b53-d2f0-4bac-b6c1-f7ba00ebae78",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": "{{base_url}}/api/Bookmark"
+			},
+			"response": []
+		},
+		{
+			"name": "Post Bookmark - no token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 401 - rejected\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"id": "53d854a3-23ec-4f8b-88fb-187058a22f28"
+					}
+				}
+			],
+			"id": "7d7e13d1-6e7c-424d-a353-6d3bd911932e",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": 1,\r\n  \"name\": \"dummyBookmarkNoAuth\",\r\n  \"dateCreated\": \"2024-04-10T21:16:48.209Z\",\r\n  \"route\": {\r\n    \"lineNumber\": 1,\r\n    \"filePath\": \"/dummy/path\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base_url}}/api/Bookmark"
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful Login POST request\", function () {",
+							"    pm.collectionVariables.set(\"bearer_token\", pm.response.json().token);",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"id": "51981d0c-bbbc-4c21-b119-0ee592aae8c4"
+					}
+				}
+			],
+			"id": "e776e51e-1189-4196-b8e8-12ccaa79136b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/login?username=dummyUser1&githubToken=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",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "dummyUser1"
+						},
+						{
+							"key": "githubToken",
+							"value": "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"
+						}
+					]
+				},
+				"description": "This is a DELETE request, and it is used to delete data that was previously created via a POST request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful DELETE request typically returns a `200 OK`, `202 Accepted`, or `204 No Content` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Getting user data\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"dummyUser1\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"id": "5bcd7fef-a639-41cd-af9f-6ae4644fc10d"
+					}
+				}
+			],
+			"id": "91dcee03-5045-47ab-a91b-84509476345f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{bearer_token}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base_url}}/api/User",
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "Post Bookmark",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.bookmarkId).to.exist;\r",
+							"    pm.collectionVariables.set(\"id_to_delete\", jsonData.bookmarkId);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"id": "f0f6813b-327b-4bc2-a08c-ebc00dcc5323"
+					}
+				}
+			],
+			"id": "d5a41ab2-6784-46d5-b07f-1eb05a03a408",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{bearer_token}}"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": 1,\r\n  \"name\": \"dummyBookmark\",\r\n  \"dateCreated\": \"2024-04-10T21:16:48.209Z\",\r\n  \"route\": {\r\n    \"lineNumber\": 1,\r\n    \"filePath\": \"/dummy/path\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base_url}}/api/Bookmark"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Bookmark",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"GET dummy Bookmark\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].name).to.eql(\"dummyBookmark\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"id": "f8b148ef-c6e1-4647-86e6-64c52125368f"
+					}
+				}
+			],
+			"id": "7b62afd9-78e1-4c83-8a00-eca79833004f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{bearer_token}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "{{base_url}}/api/Bookmark"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Bookmark",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"DELETE Bookmark\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"bookmarkId\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"id": "903f587d-59d1-42bf-8302-9e30640f8e8d"
+					}
+				}
+			],
+			"id": "136bcb7a-519d-4e94-b513-0dbe883c4ec4",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{bearer_token}}"
+					}
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/Bookmark?bookmarkId={{id_to_delete}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"Bookmark"
+					],
+					"query": [
+						{
+							"key": "bookmarkId",
+							"value": "{{id_to_delete}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Bookmark - wrong account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Correct response - cant delete someone elses bookmark\", function () {\r",
+							"    pm.response.to.have.body(\"Bookmark not found for current user\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"id": "357466fd-ab1b-4e45-9ad2-40bc0f125320"
+					}
+				}
+			],
+			"id": "b8d6a84d-17bf-4db2-b278-da080378db4b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{bearer_token}}"
+					}
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/Bookmark?bookmarkId=2",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"Bookmark"
+					],
+					"query": [
+						{
+							"key": "bookmarkId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete False Bookmark",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"id": "fb5bdf2f-60eb-4847-8b3e-99fdea135f19"
+					}
+				}
+			],
+			"id": "813785e5-f1b4-4a02-af05-9f97aa5564d2",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{bearer_token}}"
+					}
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/Bookmark?bookmarkId=cowsCantFly",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"Bookmark"
+					],
+					"query": [
+						{
+							"key": "bookmarkId",
+							"value": "cowsCantFly"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				],
+				"id": "bd753d5d-6b73-4ff9-9db3-8688120886a6"
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				],
+				"id": "07fcd883-98aa-436c-b7a7-4436d5f40283"
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "username",
+			"value": "dummyUser1"
+		},
+		{
+			"key": "base_url",
+			"value": "http://bookmark.phipson.co.za:5170"
+		},
+		{
+			"key": "bearer_token",
+			"value": "null",
+			"type": "string"
+		},
+		{
+			"key": "id_to_delete",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
