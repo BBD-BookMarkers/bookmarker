@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
@@ -47,15 +48,32 @@ namespace ToolWindow
                     
                 };
 
-                dynamicButton.Click += DynamicButton_Click;
+                dynamicButton.Click +=( s,e) =>{
+                    DynamicButton_Click(s,e,key);
+                };
+                    
+                   
                 this.DynamicButtonStackPanel.Children.Add(dynamicButton);
 
             }
         }
-        private void DynamicButton_Click(object sender, RoutedEventArgs e)
+        private void DynamicButton_Click(object sender, RoutedEventArgs e,int bookmarkKey)
         {
-            Button clickedButton = sender as Button;
-            //TODO: Add code to handle navigating to file
+            Bookmarks bookmark = allBookmarks[bookmarkKey];
+            int lineNumber = bookmark.Route.LineNumber;
+            string filePath = bookmark.Route.FilePath;
+            try
+            {
+                if (System.IO.File.Exists(filePath))
+                {
+                    Process.Start("notepad", filePath);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("file or editor does not exist");
+            }
         }
 
         private async void Refresh_Clicked(object sender, RoutedEventArgs e)
