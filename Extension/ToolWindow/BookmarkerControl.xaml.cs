@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -9,26 +11,32 @@ namespace ToolWindow
     public partial class ToolWindow1Control : UserControl
     {
 
-        private Dictionary<int, Bookmarker> Bookmark;
+        private Dictionary<int, Bookmarks> allBookmarks;
         public ToolWindow1Control()
         {
             this.InitializeComponent();
-            AddDynamicButtons();
+            //AddDynamicButtons();
         }
 
         [SuppressMessage("Microsoft.Globalization", "CA1300:SpecifyMessageBoxOptions", Justification = "Sample code")]
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Default event handler naming pattern")]
+        //
+        private async Task getBookmarks()
+        {
 
+            allBookmarks = await Requests.getBookmarks();
+        }
         private void AddDynamicButtons()
         {
-            string[] yourArray = { "1. MyForLoop 04/04/2024 19:45", "2. MyForLoop 04/04/2024 19:45", "3. MyForLoop 04/04/2024 19:45" };
+            DynamicButtonStackPanel.Children.Clear();
 
-            foreach (string item in yourArray)
+
+            foreach (int key in allBookmarks.Keys)
             {
                 Button dynamicButton = new Button
                 {
                     BorderThickness = new Thickness(0),
-                    Content = item,
+                    Content = allBookmarks[key].DateCreated.ToString() + "\t" + allBookmarks[key].Name + "\tLine Number: " + allBookmarks[key].Route.LineNumber,
                     Width = 300,
                     Height = 50,
                     Margin = new Thickness(5),
@@ -47,6 +55,11 @@ namespace ToolWindow
             //TODO: Add code to handle navigating to file
         }
 
+        private async void Refresh_Clicked(object sender, RoutedEventArgs e)
+        {
+            await getBookmarks();
+            AddDynamicButtons();
+        }
         private async void Login_Click(object sender, RoutedEventArgs e)
         {
             string full_device_code = await Requests.GetDeviceCode();
@@ -55,7 +68,9 @@ namespace ToolWindow
             bool result = LoginLauncher.ShowDialog(user_code,device_code);
             if (result)
             {
-                return;
+                Debug.WriteLine("I ran");
+                await getBookmarks();
+                AddDynamicButtons();
             }
             
             

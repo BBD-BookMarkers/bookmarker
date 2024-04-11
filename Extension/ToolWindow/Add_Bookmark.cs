@@ -51,24 +51,28 @@ namespace ToolWindow
             ThreadHelper.ThrowIfNotOnUIThread();
         }
 
-        private void CreateBookmark(object sender, EventArgs e)
+        private async void CreateBookmark(object sender, EventArgs e)
         {
             GetSelectedText getSelectedText = new GetSelectedText();
             getSelectedText.GetCurrentViewHost();
             ITextSelection selection = getSelectedText.GetSelection(getSelectedText.GetCurrentViewHost());
             int startLine = selection.StreamSelectionSpan.SnapshotSpan.Start.GetContainingLine().LineNumber + 1; // 1-based
             string filePath = getSelectedText.GetFilePath(getSelectedText.GetCurrentViewHost().TextView);
-            DateTime dateCreated = DateTime.Now;
+            
 
             string result = DialogLauncher.ShowDialog();
             if (result == null)
             {
                 return;
             }
+            string returnString=await Requests.newBookmark(result,startLine,filePath);
 
-
-
-            MessageBox.Show(result);
+            if(returnString == "success")
+            {
+                MessageBox.Show(result);
+                
+            }
+            
 
 
 /*            Route route = new Route

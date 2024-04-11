@@ -12,8 +12,10 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="150"/>
             </Grid.ColumnDefinitions>
             <Button Content="Log In" Click="Login_Click" Margin="10"  Grid.Column="0" Background="#ac99ea" />
+            <Button Content="Refresh" Click="Refresh_Clicked" Margin="10" Grid.Column="1" Background="#ac99ea"/>
         </Grid>
         <Grid x:Name="grid2" HorizontalAlignment="Center" Width="300">
             <Grid.RowDefinitions>

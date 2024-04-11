@@ -85,13 +85,9 @@ namespace ToolWindow
 
             if(token!= "Not logged in" && token!= "Fatal Error")
             {
-                Debug.WriteLine("Full bearer token: "+token);
-                Debug.WriteLine("stripped bearer token: " + token.Split('&')[0]);
                 Requests.setBearerToken(token.Split('&')[0]);
                 string user_name = await Requests.getUserName();
-                Debug.WriteLine("userName: " + user_name);
                 await Requests.newJWT();
-                Debug.WriteLine(Requests.getJWT());
                 isLoggedInChanged?.Invoke(this, true);
                 isLoggedIn = true;
             }

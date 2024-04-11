@@ -60,6 +60,48 @@ namespace ToolWindow
             return bearerToken;
         }
 
+
+        public static async Task<string> newBookmark(string name, int lineNumber, string filePath)
+        {
+            var newFilePath= filePath.Replace("\\", "\\\\");
+            using (HttpClient client = new HttpClient())
+            {
+                string url = apiURL + "/api/Bookmark";
+                var request=new HttpRequestMessage(HttpMethod.Post,url);
+
+                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", jwt);
+                request.Headers.UserAgent.ParseAdd("Bookmarkers/1.0.0 (Microsoft MAUI; .NET 6.0; Windows 10)");
+                DateTime dateCreated = DateTime.Now;
+                string jsonBody = $@"
+                                    {{
+                                        ""name"": ""{name}"",
+                                        ""dateCreated"": ""{dateCreated.ToString("yyyy-MM-dd")}"",
+                                        ""route"": {{
+                                            ""lineNumber"": {lineNumber},
+                                            ""filePath"": ""{newFilePath}""
+                                        }}
+                                    }}";
+                HttpContent content= new StringContent(jsonBody,Encoding.UTF8, "application/json");
+                request.Content = content;
+                try
+                {
+                    HttpResponseMessage response = await client.SendAsync(request);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return ("success");
+                    }
+                    else
+                    {
+                        return ("Failed: " + response.StatusCode);
+                    }
+                }catch (Exception e)
+                {
+                    Debug.WriteLine(e.ToString());
+                    return("error: "+e);
+                }
+
+            }
+        }
         public static async Task<Dictionary<int, Bookmarks>> getBookmarks()
         {
 
@@ -86,13 +128,6 @@ namespace ToolWindow
                             int lineNumber = (int)obj["route"]["lineNumber"];
                             string path = (string)obj["route"]["filePath"];
 
-
-                            /* Unmerged change from project 'Api'
-                            Before:
-                                                        BookmarkRoute tempRoute = new BookmarkRoute {
-                            After:
-                                                        Models.Route tempRoute = new Models.Route {
-                            */
                             Routes tempRoute = new Routes()
                             {
                                 RouteId = tempRouteID,
