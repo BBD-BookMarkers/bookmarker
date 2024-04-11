@@ -243,6 +243,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "f0f6813b-327b-4bc2-a08c-ebc00dcc5323",
 						"exec": [
 							"pm.test(\"Successful POST request\", function () {\r",
 							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);\r",
@@ -251,9 +252,7 @@
 							"    pm.collectionVariables.set(\"id_to_delete\", jsonData.bookmarkId);\r",
 							"});"
 						],
-						"type": "text/javascript",
-						"packages": {},
-						"id": "f0f6813b-327b-4bc2-a08c-ebc00dcc5323"
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -272,7 +271,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"userId\": 1,\r\n  \"name\": \"dummyBookmark\",\r\n  \"dateCreated\": \"2024-04-10T21:16:48.209Z\",\r\n  \"route\": {\r\n    \"lineNumber\": 1,\r\n    \"filePath\": \"/dummy/path\"\r\n  }\r\n}",
+					"raw": "{\r\n  \"userId\": 3,\r\n  \"name\": \"dummyBookmark\",\r\n  \"dateCreated\": \"2024-04-10T21:16:48.209Z\",\r\n  \"route\": {\r\n    \"lineNumber\": 1,\r\n    \"filePath\": \"/dummy/path\"\r\n  }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
