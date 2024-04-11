@@ -7,12 +7,21 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              Name="MyToolWindow">
-    <Grid HorizontalAlignment="Center" Width="300">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="Auto" MinHeight="85"/>
-        </Grid.RowDefinitions>
-        <TextBlock Text="Your bookmarks:" FontSize="16" Margin="10" Grid.Row="0" />
-        <StackPanel x:Name="DynamicButtonStackPanel" Grid.Row="1" Margin="10" />
-    </Grid>
+    <StackPanel>
+        <Grid x:Name="grid1" HorizontalAlignment="Center" Width="300">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="150"/>
+            </Grid.ColumnDefinitions>
+            <Button Content="Log In" Click="Login_Click" Margin="10"  Grid.Column="0" Background="#ac99ea" />
+        </Grid>
+        <Grid x:Name="grid2" HorizontalAlignment="Center" Width="300">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="Auto" MinHeight="85"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Your bookmarks:" FontSize="16" Margin="10" Grid.Row="0"/>
+            <StackPanel x:Name="DynamicButtonStackPanel" Grid.Row="1" Margin="10" />
+        </Grid>
+    </StackPanel>
 </UserControl>

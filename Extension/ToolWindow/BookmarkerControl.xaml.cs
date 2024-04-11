@@ -46,5 +46,19 @@ namespace ToolWindow
             Button clickedButton = sender as Button;
             //TODO: Add code to handle navigating to file
         }
+
+        private async void Login_Click(object sender, RoutedEventArgs e)
+        {
+            string full_device_code = await Requests.GetDeviceCode();
+            string user_code = Requests.getUserCode(full_device_code);
+            string device_code =Requests.getDeviceCode(full_device_code);
+            bool result = LoginLauncher.ShowDialog(user_code,device_code);
+            if (result)
+            {
+                return;
+            }
+            
+            
+        }
     }
 }

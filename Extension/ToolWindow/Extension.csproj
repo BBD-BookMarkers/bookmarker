@@ -47,8 +47,13 @@
   <ItemGroup>
     <Compile Include="Add_Bookmark.cs" />
     <Compile Include="BookmarkList.cs" />
+    <Compile Include="Bookmarks.cs" />
     <Compile Include="DialogueLauncher.cs" />
     <Compile Include="GetSelectedText.cs" />
+    <Compile Include="LoginLauncher.cs" />
+    <Compile Include="LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NameInput.xaml.cs">
       <DependentUpon>NameInput.xaml</DependentUpon>
     </Compile>
@@ -59,6 +64,8 @@
       <DependentUpon>BookmarkerControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="BookmarkerPackage.cs" />
+    <Compile Include="Requests.cs" />
+    <Compile Include="Routes.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="source.extension.vsixmanifest">
@@ -84,9 +91,16 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="System.Text.Json">
+      <Version>8.0.3</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Page Include="BookmarkerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
