@@ -171,7 +171,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/api/login?username=dummyUser1&githubToken=garbageToken",
+					"raw": "{{base_url}}/api/login?username=dummyUser1&githubToken=a",
 					"host": [
 						"{{base_url}}"
 					],
@@ -186,7 +186,7 @@
 						},
 						{
 							"key": "githubToken",
-							"value": "garbageToken"
+							"value": "a"
 						}
 					]
 				},
@@ -471,7 +471,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "1efc1587-a47d-4022-9c0c-6412723ac5cb",
+				"id": "4229018a-d9ce-41e1-b121-f5a5aa47121a",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -481,7 +481,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "fd7a1a3b-cdaf-4271-befe-0133e1521457",
+				"id": "f55214bc-6a82-4111-b7d1-eb14bd381e77",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -506,11 +506,6 @@
 		{
 			"key": "id_to_delete",
 			"value": "",
-			"type": "string"
-		},
-		{
-			"key": "gh_token",
-			"value": "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",
 			"type": "string"
 		}
 	]
