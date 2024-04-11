@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Shared.Models
@@ -10,7 +9,6 @@ namespace Shared.Models
         [SwaggerSchema(ReadOnly = true)]
         public int BookmarkId { get; set; } = default;
         public int UserId { get; set; }
-        [SwaggerSchema(ReadOnly = true)]
         public int RouteId { get; set; }
         public required string Name { get; set; }
         [Column("createdDate")]

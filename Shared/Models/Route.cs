@@ -1,5 +1,4 @@
 using Swashbuckle.AspNetCore.Annotations;
-
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Shared.Models
