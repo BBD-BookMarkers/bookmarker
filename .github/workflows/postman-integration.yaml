@@ -30,7 +30,7 @@ jobs:
         
         - name: Run Postman Integration Tests
           run: |
-            newman run ./.postman/bookmark-integration-tests.json --reporters htmlextra --verbose
+            newman run ./.postman/bookmark-integration-tests.json --reporters cli,htmlextra
         
         - name: Output test results
           uses: actions/upload-artifact@v4
