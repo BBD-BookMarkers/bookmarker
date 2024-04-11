@@ -471,21 +471,21 @@
 		{
 			"listen": "prerequest",
 			"script": {
+				"id": "1efc1587-a47d-4022-9c0c-6412723ac5cb",
 				"type": "text/javascript",
 				"exec": [
 					""
-				],
-				"id": "bd753d5d-6b73-4ff9-9db3-8688120886a6"
+				]
 			}
 		},
 		{
 			"listen": "test",
 			"script": {
+				"id": "fd7a1a3b-cdaf-4271-befe-0133e1521457",
 				"type": "text/javascript",
 				"exec": [
 					""
-				],
-				"id": "07fcd883-98aa-436c-b7a7-4436d5f40283"
+				]
 			}
 		}
 	],
@@ -506,6 +506,11 @@
 		{
 			"key": "id_to_delete",
 			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "gh_token",
+			"value": "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",
 			"type": "string"
 		}
 	]
