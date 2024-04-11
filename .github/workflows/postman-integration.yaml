@@ -30,7 +30,7 @@ jobs:
         
         - name: Run Postman Integration Tests
           run: |
-            newman run ./.postman/bookmark-integration-tests.json --reporters cli,htmlextra
+            newman run ./.postman/bookmark-integration-tests.json  --env-var token=${{secrets.GH_TOKEN}} --reporters cli,htmlextra
         
         - name: Output test results
           uses: actions/upload-artifact@v4
