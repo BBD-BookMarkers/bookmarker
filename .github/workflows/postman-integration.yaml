@@ -31,10 +31,4 @@ jobs:
         - name: Run Postman Integration Tests
           run: |
             mkdir -p testResults
-            newman run ./.postman/bookmark-integration-tests.json -r htmlextra
-        
-        - name: Output test results
-          uses: actions/upload-artifact@v4
-          with:
-            name: Reports
-            path: testResults
+            newman run ./.postman/bookmark-integration-tests.json
