@@ -36,12 +36,15 @@ namespace ToolWindow
                 Button dynamicButton = new Button
                 {
                     BorderThickness = new Thickness(0),
-                    Content = allBookmarks[key].DateCreated.ToString() + "\t" + allBookmarks[key].Name + "\tLine Number: " + allBookmarks[key].Route.LineNumber,
-                    Width = 300,
+                    Content = allBookmarks[key].DateCreated.ToString("yyyy-MM-dd") + " " + allBookmarks[key].Name + " Line Number: " + allBookmarks[key].Route.LineNumber,
+                    Width = 450,
                     Height = 50,
                     Margin = new Thickness(5),
                     Background = new System.Windows.Media.SolidColorBrush(Color.FromRgb(172, 153, 234)),
                     BorderBrush = new SolidColorBrush(Color.FromRgb(172, 153, 234)),
+                    HorizontalContentAlignment=HorizontalAlignment.Left,
+                    Padding = new Thickness(5),
+                    
                 };
 
                 dynamicButton.Click += DynamicButton_Click;

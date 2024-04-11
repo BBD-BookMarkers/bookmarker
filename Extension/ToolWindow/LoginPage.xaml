@@ -5,20 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ToolWindow"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <StackPanel x:Name="LoginLayout">
-            <TextBlock 
-         Text="Welcome to Bookmarkers"
-         FontSize="40"/>
-            <TextBlock
-         Text="You will be redirected to Github to login shortly!"
-         FontSize="25"/>
+             d:DesignHeight="300" d:DesignWidth="800">
+    <StackPanel x:Name="MainPanel" Height="300">
+        <TextBlock 
+Text="Welcome to Bookmarkers"
+FontSize="40"/>
+        <TextBlock
+Text="You will be redirected to Github to login shortly!"
+FontSize="25"/>
+    </StackPanel>
 
-        </StackPanel>
-        <StackPanel x:Name="MainPanel">
-            
-        </StackPanel>
-    </Grid>
-    
 </UserControl>

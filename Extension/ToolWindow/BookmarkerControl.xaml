@@ -6,18 +6,19 @@
              xmlns:vsshell="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.15.0"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
-             Name="MyToolWindow">
+             Name="MyToolWindow"
+                Background="White">
     <StackPanel>
-        <Grid x:Name="grid1" HorizontalAlignment="Center" Width="300">
+        <Grid x:Name="grid1" HorizontalAlignment="Center" Width="500">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="150"/>
             </Grid.ColumnDefinitions>
             <Button Content="Log In" Click="Login_Click" Margin="10"  Grid.Column="0" Background="#ac99ea" />
-            <Button Content="Refresh" Click="Refresh_Clicked" Margin="10" Grid.Column="1" Background="#ac99ea"/>
+            <Button Content="Refresh" Click="Refresh_Clicked" Margin="10" Grid.Column="2" Background="#ac99ea"/>
         </Grid>
-        <Grid x:Name="grid2" HorizontalAlignment="Center" Width="300">
+        <Grid x:Name="grid2" HorizontalAlignment="Center" Width="500">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="Auto" MinHeight="85"/>
