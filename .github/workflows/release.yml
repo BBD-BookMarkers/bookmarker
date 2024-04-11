@@ -40,6 +40,10 @@ jobs:
             dotnet workload restore
             dotnet publish -f net8.0-windows10.0.19041.0 -p:RuntimeIdentifierOverride=win10-x64 -p:PackageCertificateThumbprint="${{ secrets.WINDOWS_PFX_THUMBPRINT }}"
 
+        - name: Zip build
+          run: |
+            Compress-Archive -Path frontendProgram/bin/Release/net8.0-windows10.0.19041.0/win10-x64/AppPackages/*/* -DestinationPath ./windows-x64.zip
+
         - name: Create release
           uses: "marvinpinto/action-automatic-releases@latest"
           with:
@@ -48,4 +52,4 @@ jobs:
             prerelease: false
             title: "Windows UI"
             files: |
-              ./frontendProgram/bin/Release/net8.0-windows10.0.19041.0/win10-x64/AppPackages/*/*
+              ./windows-x64.zip
