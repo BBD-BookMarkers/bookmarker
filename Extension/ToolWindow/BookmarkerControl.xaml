@@ -4,32 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vsshell="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.15.0"
-             Background="{DynamicResource {x:Static vsshell:VsBrushes.WindowKey}}"
-             Foreground="{DynamicResource {x:Static vsshell:VsBrushes.WindowTextKey}}"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              Name="MyToolWindow">
-    <Frame BorderColor = "Silver" BackgroundColor="Black">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Button x:Name="Refresh" Text="Refresh" SemanticProperties.Hint="Click me to refresh and get your latest bookmarks" Clicked="Refresh_Clicked" Grid.Column="0" HorizontalOptions="Start" BackgroundColor="#ac99ea" TextColor="Black"/>
-            <Button x:Name="Login" Text="Login" SemanticProperties.Hint="Click me to login with github" Clicked="Login_Clicked" Grid.Column="4" HorizontalOptions="End" BackgroundColor="#ac99ea" TextColor="Black"/>
-        </Grid>
-    </Frame>
-
-    <Frame BorderColor = "Silver" BackgroundColor="Black">
-        <Grid HorizontalAlignment="Center" Width="300" RenderTransformOrigin="0,0.494">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="Auto" MinHeight="85"/>
-            </Grid.RowDefinitions>
-            <TextBlock Text="Your bookmarks:" FontSize="16" Margin="10" Grid.Row="0" />
-            <StackPanel x:Name="DynamicButtonStackPanel" Grid.Row="1" Margin="10" />
-        </Grid>
-    </Frame>
+    <Grid HorizontalAlignment="Center" Width="300">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="Auto" MinHeight="85"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Your bookmarks:" FontSize="16" Margin="10" Grid.Row="0" />
+        <StackPanel x:Name="DynamicButtonStackPanel" Grid.Row="1" Margin="10" />
+    </Grid>
 </UserControl>

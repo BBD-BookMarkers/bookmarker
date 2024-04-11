@@ -3,8 +3,6 @@ using Microsoft.VisualStudio.Text.Editor;
 using System;
 using System.ComponentModel.Design;
 using System.Windows;
-using Shared.Models;
-using Shared.Requests;
 using Task = System.Threading.Tasks.Task;
 
 namespace ToolWindow
@@ -73,7 +71,7 @@ namespace ToolWindow
             MessageBox.Show(result);
 
 
-            Route route = new Route
+/*            Route route = new Route
             {
                 FilePath = filePath,
                 LineNumber = startLine,
@@ -86,7 +84,7 @@ namespace ToolWindow
                 Name = result,
                 DateCreaetd = dateCreated,
                 Route = route,
-            };
+            };*/
 
             // Add the bookmark to the list of bookmarks
 

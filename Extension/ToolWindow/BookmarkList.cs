@@ -9,7 +9,7 @@ namespace ToolWindow
 {
     public class NewBookmark
     {
-        private Dictionary<int, Bookmark> Bookmarks;
+        private Dictionary<int, Bookmarker> Bookmarks;
 
         public NewBookmark CreateBookmark(int userId, string name, int lineNumber, string filePath)
         {
@@ -30,7 +30,7 @@ namespace ToolWindow
 
         public ArrayList GetAllBookmarks()
         {
-            return bookmarks;
+            return null;
         }
     }
 }

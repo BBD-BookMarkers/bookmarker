@@ -1,9 +1,15 @@
-﻿namespace ToolWindow
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+
+namespace ToolWindow
 {
     public partial class ToolWindow1Control : UserControl
     {
 
-        private Dictionary<int, Bookmark> Bookmark;
+        private Dictionary<int, Bookmarker> Bookmark;
         public ToolWindow1Control()
         {
             this.InitializeComponent();
@@ -12,17 +18,6 @@
 
         [SuppressMessage("Microsoft.Globalization", "CA1300:SpecifyMessageBoxOptions", Justification = "Sample code")]
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Default event handler naming pattern")]
-        
-        private async void Login_Clicked(object sender, EventArgs e)
-        {
-            string full_device_code = await Request.GetDeviceCode();
-            string user_code = Request.getUserCode(full_device_code);
-            string device_code = Request.getDeviceCode(full_device_code);
-            var popup = new LoginPage(user_code, device_code);
-            await Navigation.PushModalAsync(popup);
-            // Display the screen with the list of bookmarks
-
-        }
 
         private void AddDynamicButtons()
         {
@@ -37,7 +32,7 @@
                     Width = 300,
                     Height = 50,
                     Margin = new Thickness(5),
-                    Background = new SolidColorBrush(Color.FromRgb(172, 153, 234)),
+                    Background = new System.Windows.Media.SolidColorBrush(Color.FromRgb(172, 153, 234)),
                     BorderBrush = new SolidColorBrush(Color.FromRgb(172, 153, 234)),
                 };
 
