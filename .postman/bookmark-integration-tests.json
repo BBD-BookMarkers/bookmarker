@@ -143,15 +143,14 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "51981d0c-bbbc-4c21-b119-0ee592aae8c4",
 						"exec": [
 							"pm.test(\"Successful Login POST request\", function () {",
 							"    pm.collectionVariables.set(\"bearer_token\", pm.response.json().token);",
 							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);",
 							"});"
 						],
-						"type": "text/javascript",
-						"packages": {},
-						"id": "51981d0c-bbbc-4c21-b119-0ee592aae8c4"
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -172,7 +171,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/api/login?username=dummyUser1&githubToken=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",
+					"raw": "{{base_url}}/api/login?username=dummyUser1&githubToken=garbageToken",
 					"host": [
 						"{{base_url}}"
 					],
@@ -187,7 +186,7 @@
 						},
 						{
 							"key": "githubToken",
-							"value": "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"
+							"value": "garbageToken"
 						}
 					]
 				},
