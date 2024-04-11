@@ -124,7 +124,7 @@ namespace Shared.Requests
                 string queryURL = apiURL + "/api/login?username=" + user_name + "&githubToken=" + bearerToken;
                 try
                 {
-                    HttpResponseMessage response = await client.PostAsync(queryURL + "/api/Login", null);
+                    HttpResponseMessage response = await client.PostAsync(queryURL, null);
                     if (response.IsSuccessStatusCode)
                     {
                         var body = await response.Content.ReadAsStreamAsync();

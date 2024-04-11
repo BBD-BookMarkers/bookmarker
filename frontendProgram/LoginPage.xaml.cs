@@ -4,7 +4,6 @@ namespace frontendProgram;
 
 public partial class LoginPage : ContentPage
 {
-    private MessageService messageService;
     private static string githubLoginURL = "https://github.com/login/device";
     private static ProcessStartInfo psi = new ProcessStartInfo
     {
@@ -16,7 +15,6 @@ public partial class LoginPage : ContentPage
     public LoginPage(string user_code, string device_code)
 	{
 		InitializeComponent();
-        this.messageService = new MessageService();
         onLoad(user_code,device_code);
     }
 
@@ -91,7 +89,7 @@ public partial class LoginPage : ContentPage
         Button loggedIn = new Button();
         loggedIn.Margin = 10;
         loggedIn.Text = "I have logged in :)";
-
+        loggedIn.BackgroundColor = Color.FromArgb("#ac99ea");
 
         loggedIn.Clicked += async (s, e) =>
         {
@@ -115,14 +113,23 @@ public partial class LoginPage : ContentPage
             }
             else
             {
-                messageService.sendMessage(token);
                 Request.setBearerToken(token.Split("&")[0]);
                 string user_name = await Request.getUserName();
                 await Request.newJWT();
                 await Navigation.PopModalAsync();
             }
         };
+
+        Button backButton = new Button();
+        backButton.Margin = 10;
+        backButton.Text = "Back";
+        backButton.BackgroundColor = Color.FromArgb("#ac99ea");
+        backButton.Clicked += async (s, e) =>
+        {
+            await Navigation.PopModalAsync();
+        };
         LoginLayout.Children.Add(loggedIn);
+        LoginLayout.Children.Add(backButton);
         await launchGithub();
 
 
