@@ -2,7 +2,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Extension
+namespace ToolWindow
 {
     /// <summary>
     /// This class implements the tool window exposed by this package and hosts a user control.
@@ -15,15 +15,15 @@ namespace Extension
     /// implementation of the IVsUIElementPane interface.
     /// </para>
     /// </remarks>
-    [Guid("5595cb19-e544-475d-97de-71e07b3741c0")]
-    public class ToolWindow1 : ToolWindowPane
+    [Guid("7fb89476-1d23-484f-b83d-2a73b11408a8")]
+    public class Bookmarker : ToolWindowPane
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ToolWindow1"/> class.
+        /// Initializes a new instance of the <see cref="Bookmarker"/> class.
         /// </summary>
-        public ToolWindow1() : base(null)
+        public Bookmarker() : base(null)
         {
-            this.Caption = "ToolWindow1";
+            this.Caption = "Bookmarker";
 
             // This is the user control hosted by the tool window; Note that, even if this class implements IDisposable,
             // we are not calling Dispose on this object. This is because ToolWindowPane calls Dispose on

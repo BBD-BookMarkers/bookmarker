@@ -1,0 +1,56 @@
+name: Client UI Release
+
+on: 
+  push:
+    branches:
+      - main
+      - dev
+    paths:
+        - "frontendProgram/**"
+        - "Shared/**"
+        - ".github/workflows/release.yml"
+jobs:
+   make-release:
+        runs-on: windows-latest
+
+        steps:
+        - uses: actions/checkout@v3
+
+        - name: Setup dotnet
+          uses: actions/setup-dotnet@v4
+          with:
+            dotnet-version: 8.x
+
+        - name: Install ASP.NET Core
+          run: dotnet tool install --global dotnet-aspnet-codegenerator
+
+        - name: Install Maui
+          run: dotnet workload install maui
+
+        - name: Decrypt PFX file
+          run: |
+            echo "${{ secrets.WINDOWS_PFX_FILE }}" > cert.pfx.asc
+            certutil -decode cert.pfx.asc cert.pfx
+
+        - name: Add certificate to store
+          run: certutil -user -q -p ${{ secrets.WINDOWS_PFX_PASSWORD }} -importpfx cert.pfx NoRoot
+
+        - name: Build and publish project
+          run: |
+            cd frontendProgram
+            dotnet workload restore
+            dotnet publish -f net8.0-windows10.0.19041.0 -p:RuntimeIdentifierOverride=win10-x64 -p:PackageCertificateThumbprint="${{ secrets.WINDOWS_PFX_THUMBPRINT }}"
+
+        - name: Zip build
+          run: |
+            Compress-Archive -Path frontendProgram/bin/Release/net8.0-windows10.0.19041.0/win10-x64/AppPackages/*/* -DestinationPath ./windows-x64.zip
+
+        - name: Create release
+          uses: "marvinpinto/action-automatic-releases@latest"
+          with:
+            repo_token: ${{ secrets.GITHUB_TOKEN }}
+            automatic_release_tag: "latest"
+            prerelease: false
+            title: "Windows UI"
+            files: |
+              ./windows-x64.zip

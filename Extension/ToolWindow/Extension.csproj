@@ -10,11 +10,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectTypeGuids>{82b43b9b-a64c-4715-b499-d71e9ca2bd60};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <ProjectGuid>{97A14AF9-CD83-40B0-B43D-6785F40E09D5}</ProjectGuid>
+    <ProjectGuid>{C7B93289-9B9C-4A02-BFC7-5832D89516DE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Extension</RootNamespace>
-    <AssemblyName>Extension</AssemblyName>
+    <RootNamespace>ToolWindow</RootNamespace>
+    <AssemblyName>ToolWindow</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <GeneratePkgDefFile>true</GeneratePkgDefFile>
     <UseCodebase>true</UseCodebase>
@@ -45,13 +45,27 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ExtensionPackage.cs" />
-    <Compile Include="ToolWindow1.cs" />
-    <Compile Include="ToolWindow1Command.cs" />
-    <Compile Include="ToolWindow1Control.xaml.cs">
-      <DependentUpon>ToolWindow1Control.xaml</DependentUpon>
+    <Compile Include="Add_Bookmark.cs" />
+    <Compile Include="BookmarkList.cs" />
+    <Compile Include="Bookmarks.cs" />
+    <Compile Include="DialogueLauncher.cs" />
+    <Compile Include="GetSelectedText.cs" />
+    <Compile Include="LoginLauncher.cs" />
+    <Compile Include="LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NameInput.xaml.cs">
+      <DependentUpon>NameInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Bookmarker.cs" />
+    <Compile Include="BookmarkerCommand.cs" />
+    <Compile Include="BookmarkerControl.xaml.cs">
+      <DependentUpon>BookmarkerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BookmarkerPackage.cs" />
+    <Compile Include="Requests.cs" />
+    <Compile Include="Routes.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="source.extension.vsixmanifest">
@@ -73,25 +87,34 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.SDK" Version="17.0.32112.339" ExcludeAssets="runtime" />
-    <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="17.9.3184" />
+    <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="17.9.3174">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="System.Text.Json">
+      <Version>8.0.3</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="ToolWindow1Control.xaml">
+    <Page Include="BookmarkerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LoginPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NameInput.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.1' ">
-    <ProjectReference Include="..\mopcore\MopCore.csproj" />
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net472' ">
-      <ProjectReference Include="..\MopStandard\MopFW.csproj" />
-  </ItemGroup>
   <ItemGroup>
-    <VSCTCompile Include="ExtensionPackage.vsct">
+    <Content Include="Resources\Add_Bookmark.png" />
+    <Content Include="Resources\ToolWindow1Command.png" />
+    <VSCTCompile Include="BookmarkerPackage.vsct">
       <ResourceName>Menus.ctmenu</ResourceName>
     </VSCTCompile>
-    <Content Include="Resources\ToolWindow1Command.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="'$(VSToolsPath)' != ''" />

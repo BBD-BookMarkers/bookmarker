@@ -38,6 +38,7 @@ builder.Services.AddSwaggerGen(option =>
             Array.Empty<string>()
         }
     });
+    option.EnableAnnotations();
 });
 builder.Services.AddDbContext<DataContext>(options =>
 {
